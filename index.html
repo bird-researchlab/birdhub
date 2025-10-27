@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>Unity Web Player | birdHub</title>
+  <link rel="shortcut icon" href="TemplateData/favicon.ico">
+  <link rel="stylesheet" href="TemplateData/style.css">
+
+  <style>
+    html, body { margin:0; padding:0; height:100%; background:#000; overflow:hidden; }
+
+    #unity-container { position:fixed; inset:0; width:100vw; height:100vh; }
+    #unity-canvas { width:100%; height:100%; background:#000; }
+
+    #unity-loading-bar, #unity-footer, .unity-logo, .unity-default-text { display:none !important; }
+
+    /* Rotate overlay */
+    #rotateOverlay {
+      position: fixed; inset: 0; display: none;
+      align-items: center; justify-content: center;
+      background: rgba(0,0,0,0.9); color:#fff; z-index:10000; text-align:center; padding:24px;
+      font-family: sans-serif;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="unity-container" class="unity-desktop">
+    <canvas id="unity-canvas" width=960 height=600 tabindex="-1"></canvas>
+    <div id="unity-loading-bar">
+      <div id="unity-logo"></div>
+      <div id="unity-progress-bar-empty"><div id="unity-progress-bar-full"></div></div>
+    </div>
+    <div id="unity-warning"></div>
+    <div id="unity-footer">
+      <div id="unity-logo-title-footer"></div>
+      <div id="unity-fullscreen-button"></div>
+      <div id="unity-build-title">birdHub</div>
+    </div>
+  </div>
+
+  <div id="rotateOverlay"><div class="box">
+    <h2>Rotate your device</h2>
+    <p>This experience works in landscape mode. Please rotate your phone.</p>
+  </div></div>
+
+  <script>
+    var canvas = document.querySelector("#unity-canvas");
+
+    function unityShowBanner(msg, type) {
+      var warningBanner = document.querySelector("#unity-warning");
+      function updateBannerVisibility() {
+        warningBanner.style.display = warningBanner.children.length ? 'block' : 'none';
+      }
+      var div = document.createElement('div');
+      div.innerHTML = msg;
+      warningBanner.appendChild(div);
+      if (type == 'error') div.style = 'background:red; padding:10px;';
+      else {
+        if (type == 'warning') div.style = 'background:yellow; padding:10px;';
+        setTimeout(function(){ warningBanner.removeChild(div); updateBannerVisibility(); }, 5000);
+      }
+      updateBannerVisibility();
+    }
+
+    var buildUrl = "Build";
+    var loaderUrl = buildUrl + "/birdHubBuild.loader.js";
+    var config = {
+      arguments: [],
+      dataUrl: buildUrl + "/birdHubBuild.data",
+      frameworkUrl: buildUrl + "/birdHubBuild.framework.js",
+      codeUrl: buildUrl + "/birdHubBuild.wasm",
+      streamingAssetsUrl: "StreamingAssets",
+      companyName: "ytu",
+      productName: "birdHub",
+      productVersion: "1.0",
+      showBanner: unityShowBanner,
+      devicePixelRatio: 1,
+      matchWebGLToCanvasSize: true
+    };
+
+    // Mobile viewport setup
+    if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+      var meta = document.createElement('meta');
+      meta.name = 'viewport';
+      meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
+      document.getElementsByTagName('head')[0].appendChild(meta);
+      document.querySelector("#unity-container").className = "unity-mobile";
+      canvas.className = "unity-mobile";
+    }
+
+    document.querySelector("#unity-loading-bar").style.display = "block";
+
+    function resizeCanvasToWindow(){ canvas.style.width = '100%'; canvas.style.height = '100%'; }
+    window.addEventListener('resize', resizeCanvasToWindow);
+    window.addEventListener('orientationchange', resizeCanvasToWindow);
+    window.addEventListener('load', resizeCanvasToWindow);
+
+    // Orientation overlay toggle
+    function updateOrientationUI() {
+      var portrait = window.matchMedia("(orientation: portrait)").matches;
+      document.getElementById('rotateOverlay').style.display = portrait ? 'flex' : 'none';
+    }
+    window.addEventListener('resize', updateOrientationUI);
+    window.addEventListener('orientationchange', updateOrientationUI);
+    window.addEventListener('load', updateOrientationUI);
+
+    var script = document.createElement("script");
+    script.src = loaderUrl;
+    script.onload = () => {
+      createUnityInstance(canvas, config, (progress) => {
+        document.querySelector("#unity-progress-bar-full").style.width = (100 * progress) + "%";
+      }).then((unityInstance) => {
+        document.querySelector("#unity-loading-bar").style.display = "none";
+        var fsBtn = document.querySelector("#unity-fullscreen-button");
+        if (fsBtn) fsBtn.style.display = "none";
+      }).catch((message) => {
+        alert(message);
+      });
+    };
+    document.body.appendChild(script);
+  </script>
+
+  <!-- Multi-stream audio bridge -->
+  <script>
+    window.__unityRadio = {
+      map: new Map(),
+      getOrCreate(id){
+        if (!this.map.has(id)) {
+          var el = document.createElement('audio');
+          el.style.display = 'none';
+          el.crossOrigin = 'anonymous';
+          el.playsInline = true;
+          el.autoplay = false;
+          document.body.appendChild(el);
+          this.map.set(id, { el });
+        }
+        return this.map.get(id);
+      },
+      init(id, url){ var h = this.getOrCreate(id); h.el.src = url; h.el.loop = true; },
+      play(id){ var h = this.map.get(id); if (!h) return; return h.el.play(); },
+      pause(id){ var h = this.map.get(id); if (!h) return; h.el.pause(); },
+      setVolume(id,v){ var h = this.map.get(id); if (!h) return; h.el.volume = Math.min(Math.max(v,0),1); }
+    };
+  </script>
+</body>
+</html>
