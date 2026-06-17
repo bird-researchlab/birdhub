@@ -101,6 +101,7 @@
         .main-bg::after { content:''; position:absolute; inset:0; background:rgba(0,0,0,.5); }
 
         .intro-container { display:flex; flex-direction:row; gap:40px; align-items:center; justify-content:center; padding:20px; z-index:10; position:relative; }
+        #intro-wrapper { position:relative; z-index:10; }
 
         .scene-card { position:relative; width:min(360px,46vw); height:min(500px,64vw); cursor:pointer; transition:transform .3s ease; }
         .scene-card:hover { transform:translateY(-4px); }
@@ -155,6 +156,7 @@
             .side-title { font-size:4.5vh; letter-spacing:.3vh; }
             .card-country { font-size:2.8vh; letter-spacing:.2vh; }
             .univ-subtitle { font-size:2.2vh; }
+            #intro-tagline { font-size:.65rem; letter-spacing:.12em; margin-bottom:1.2em; padding:0 2vw; }
         }
         @media (orientation:portrait) and (max-width:768px) {
             .intro-container { flex-direction:column; gap:1.5vh; padding:3vh 4vw; }
@@ -166,6 +168,7 @@
             .side-title { font-size:2.4vh; letter-spacing:.2vh; }
             .card-country { font-size:1.5vh; letter-spacing:.15vh; }
             .univ-subtitle { font-size:1.4vh; }
+            #intro-tagline { font-size:2vh; letter-spacing:.08em; margin-top:2vh; margin-bottom:.6vh; padding:0 4vw; white-space:normal; }
         }
 
         /* ── SAHNE WRAPPER (her iki sahne için) ──────────── */
@@ -222,7 +225,27 @@
         }
         .jp-hub-lotus:hover { filter:brightness(1.1) drop-shadow(0 0 8px rgba(0,255,255,.5)); }
 
-        /* ── RADYO ───────────────────────────────────────── */
+        /* ── SPEAKER LIVE STREAM TOOLTIP ─────────────────── */
+        .speaker-hover-zone {
+            position:absolute; bottom:8%; left:8%; width:100%; height:auto;
+            cursor:default; z-index:12;
+        }
+        .speaker-hover-zone img { width:100%; height:auto; display:block; pointer-events:none; }
+        .speaker-tooltip {
+            position:absolute; top:108%; left:50%; transform:translateX(-50%) translateY(-4px);
+            background:rgba(0,20,20,.85); border:1px solid #00e5d4; border-radius:6px;
+            padding:5px 10px; font-size:.78rem; color:#e8fffd;
+            white-space:nowrap; pointer-events:none;
+            opacity:0; transition:opacity .4s ease, transform .4s ease; z-index:30;
+            box-shadow:0 0 10px rgba(0,229,212,.3);
+        }
+        .speaker-hover-zone:hover .speaker-tooltip {
+            opacity:1; transform:translateX(-50%) translateY(0);
+        }
+        .speaker-hover-zone:hover .speaker-tooltip { opacity:1; }
+        @media (orientation:portrait) and (max-width:768px) {
+            .speaker-tooltip { display:none; }
+        }
         .radio-device-wrapper { position:absolute; left:42%; bottom:16%; width:9.5%; height:auto; z-index:11; }
         #page-japan .radio-device-wrapper { left:67%; bottom:19%; width:8.5%; }
         .radio-speaker-body { position:absolute; bottom:8%; left:8%; width:100%; height:auto; pointer-events:none; }
@@ -520,10 +543,10 @@
 <!-- ── PRELOADER ─────────────────────────────────────────── -->
 <div id="bh-screen">
     <img id="bh-logo" src="../assets/ui/intro/birdhub_logo.png" alt="BirdHub">
-    <div id="bh-tagline">
-        <span data-lang="en" lang="en">LIVE SOUNDSCAPES AND BIRDLIFE, CONNECTED IN REAL TIME. ISTANBUL ↔ TOKYO.</span>
-        <span data-lang="tr" style="display:none">İSTANBUL ↔ TOKYO.<br>CANLI SES MANZARALARI VE KUŞ YAŞAMI, GERÇEK ZAMANDA BİRBİRİNE BAĞLANIYOR.</span>
-        <span class="font-jp" data-lang="jp" style="display:none">ライブサウンドスケープと鳥たちを、リアルタイムにつなぐ。<br>イスタンブール ↔ 東京</span>
+    <div id="bh-tagline" style="margin-top:1em; line-height:2;">
+        <span style="display:block;"><b>LIVE</b> SOUNDSCAPES AND BIRD LIFE</span>
+        <span style="display:block;">CONNECTED IN <b>REAL LIFE</b></span>
+        <span style="display:block;">ISTANBUL &lt;--&gt; TOKYO</span>
     </div>
     <div id="bh-track"><div id="bh-bar"></div></div>
     <div id="bh-lbl">...</div>
@@ -541,6 +564,12 @@
 <!-- INTRO: Scene selection -->
 <div id="page-intro" class="bh-page">
     <div id="intro-world-bg"></div>
+    <div id="intro-wrapper" style="display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%;gap:0;z-index:10;position:relative;">
+    <div id="intro-tagline" style="text-align:center;font-size:.88rem;letter-spacing:.18em;color:rgba(255,255,255,.75);margin-bottom:1.8em;pointer-events:none;text-shadow:0 1px 6px rgba(0,0,0,.7);">
+        <span data-lang="en"><b>LIVE</b> SOUNDSCAPES AND BIRD LIFE, CONNECTED IN <b>REAL LIFE</b></span>
+        <span data-lang="tr" style="display:none"><b>CANLI</b> SES MANZARALARI VE KUŞ YAŞAMI, ZAMANLI <b>BİRBİRİNE BAĞLANIYOR</b></span>
+        <span class="font-jp" data-lang="jp" style="display:none"><b>ライブ</b>サウンドスケープと鳥たちを、<b>リアルタイム</b>につなぐ</span>
+    </div>
     <div class="intro-container">
         <div class="scene-card" onclick="BH.goto('turkey')">
             <div class="card-bg"></div>
@@ -556,7 +585,7 @@
                         <span data-lang="jp" style="display:none">イスタンブール</span>
                     </div>
                     <div class="card-country">
-                        <span data-lang="en">TÜRKIYE</span>
+                        <span data-lang="en">TÜRKİYE</span>
                         <span data-lang="tr" style="display:none">TÜRKİYE</span>
                         <span data-lang="jp" style="display:none">トルコ</span>
                     </div>
@@ -595,6 +624,7 @@
             </div>
         </div>
     </div>
+    </div>
 </div>
 
 <!-- TURKEY SCENE -->
@@ -627,7 +657,10 @@
         </div>
         <div class="radio-device-wrapper">
             <img src="../assets/ui/both/radio/govde.png" class="radio-govde" style="opacity:0;pointer-events:none;">
-            <img src="../assets/ui/both/speaker.png" class="radio-speaker-body">
+            <div class="speaker-hover-zone">
+                <img src="../assets/ui/both/speaker.png">
+                <span class="speaker-tooltip" id="trSpeakerTooltip">Live Stream</span>
+            </div>
             <div class="speaker-wave-right wave-group"><div class="radio-wave wave1"></div><div class="radio-wave wave2"></div><div class="radio-wave wave3"></div></div>
             <img src="../assets/ui/tr/radio/holo.png" class="radio-holo">
             <img src="../assets/ui/tr/radio/flag.png" class="radio-bayrak" id="trRadioBayrak">
@@ -938,7 +971,10 @@
         <img src="../assets/ui/jp/hub.png" class="jp-hub-lotus" id="jpHubLotus">
         <div class="radio-device-wrapper">
             <img src="../assets/ui/both/radio/govde.png" class="radio-govde" style="opacity:0;pointer-events:none;">
-            <img src="../assets/ui/both/speaker.png" class="radio-speaker-body">
+            <div class="speaker-hover-zone">
+                <img src="../assets/ui/both/speaker.png">
+                <span class="speaker-tooltip" id="jpSpeakerTooltip">Live Stream</span>
+            </div>
             <div class="speaker-wave-right wave-group"><div class="radio-wave wave1"></div><div class="radio-wave wave2"></div><div class="radio-wave wave3"></div></div>
             <img src="../assets/ui/tr/radio/holo.png" class="radio-holo">
             <img src="../assets/ui/jp/radio/flag.png" class="radio-bayrak" id="jpRadioBayrak">
@@ -1374,6 +1410,13 @@ var BH = (function () {
 
     // Intro slogan + kart metinlerini güncelle
     function _syncIntroLang() {
+        // Intro tagline
+        var tagline = document.getElementById('intro-tagline');
+        if (tagline) {
+            tagline.querySelectorAll('[data-lang]').forEach(function(el) {
+                el.style.display = el.dataset.lang === _globalLang ? '' : 'none';
+            });
+        }
         // Slogan
         var slogan = document.getElementById('intro-slogan');
         if (slogan) {
@@ -1392,6 +1435,13 @@ var BH = (function () {
         // Ülke adı satırları (card-country)
         document.querySelectorAll('.card-country [data-lang]').forEach(function(span) {
             span.style.display = span.dataset.lang === _globalLang ? '' : 'none';
+        });
+        // Speaker tooltips
+        var _tooltipStr = { en:'Live Stream', tr:'Canlı Yayın', jp:'ライブ配信' };
+        var _tooltipTxt = _tooltipStr[_globalLang] || _tooltipStr.en;
+        ['trSpeakerTooltip','jpSpeakerTooltip'].forEach(function(id) {
+            var el = document.getElementById(id);
+            if (el) el.textContent = _tooltipTxt;
         });
     }
 
@@ -2107,7 +2157,7 @@ var BH = (function () {
                 : '📱 Desktop and landscape mode recommended for a better experience.';
             el.classList.add('show');
             requestAnimationFrame(function(){ requestAnimationFrame(function(){ el.classList.add('visible'); }); });
-            setTimeout(function(){ el.classList.remove('visible'); setTimeout(function(){ el.classList.remove('show'); }, 400); }, 8000);
+            setTimeout(function(){ el.classList.remove('visible'); setTimeout(function(){ el.classList.remove('show'); }, 400); }, 12000);
         }
         document.readyState === 'loading'
             ? document.addEventListener('DOMContentLoaded', check)
