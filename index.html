@@ -22,7 +22,7 @@
             src: url('../assets/ui/fonts/NotoSansJP-Regular.ttf') format('truetype');
             font-weight: normal; font-display: swap;
         }
-        body { font-family: 'Liberation Sans', Arial, sans-serif; }
+        body { font-family: 'Liberation Sans', Arial, sans-serif; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; text-rendering:optimizeLegibility; }
         .font-jp { font-family: 'Noto Sans JP', sans-serif !important; font-weight:400; }
 
         /* ── PRELOADER ───────────────────────────────────── */
@@ -137,19 +137,19 @@
         }
         .university-logo img { width:100%; height:100%; object-fit:contain; filter:drop-shadow(0 4px 8px rgba(0,0,0,.4)); }
         .card-country {
-            font-size:1.15rem; font-weight:bold; color:#fdf5e6;
+            font-size:1.15rem; font-weight:600; color:#fdf5e6;
             text-transform:uppercase; letter-spacing:2px; text-align:center;
-            text-shadow:0 0 8px rgba(253,245,230,.6),0 2px 4px rgba(0,0,0,.8);
+            text-shadow:0 0 6px rgba(253,245,230,.5),0 1px 2px rgba(0,0,0,.6);
             transition:text-shadow .3s ease, color .3s ease;
         }
-        .scene-card:hover .card-country { color:#fff; text-shadow:0 0 12px rgba(255,255,255,.8),0 2px 4px rgba(0,0,0,.8); }
+        .scene-card:hover .card-country { color:#fff; text-shadow:0 0 9px rgba(255,255,255,.6),0 1px 2px rgba(0,0,0,.6); }
         .side-title {
-            font-size:1.6rem; font-weight:bold; color:#fdf5e6;
+            font-size:1.6rem; font-weight:600; color:#fdf5e6;
             text-transform:uppercase; letter-spacing:2px; text-align:center;
-            text-shadow:0 0 10px rgba(253,245,230,.8),0 0 20px rgba(253,245,230,.5),0 2px 5px rgba(0,0,0,.8);
+            text-shadow:0 0 8px rgba(253,245,230,.65),0 0 14px rgba(253,245,230,.35),0 1px 3px rgba(0,0,0,.6);
             transition:text-shadow .3s ease, color .3s ease;
         }
-        .scene-card:hover .side-title { color:#fff; text-shadow:0 0 15px rgba(255,255,255,.9),0 0 30px rgba(255,255,255,.7),0 2px 5px rgba(0,0,0,.8); }
+        .scene-card:hover .side-title { color:#fff; text-shadow:0 0 11px rgba(255,255,255,.7),0 0 20px rgba(255,255,255,.5),0 1px 3px rgba(0,0,0,.6); }
         .univ-subtitle { font-size:.95rem; color:#e0e0e0; text-align:center; letter-spacing:.5px; text-shadow:0 2px 4px rgba(0,0,0,.8); margin-top:4px; }
 
         /* Intro — mobile */
@@ -417,7 +417,7 @@
             padding-right:14px;
             scrollbar-gutter:stable;
         }
-        .hub-text strong { text-shadow:0 1px 3px rgba(0,0,0,.7); }
+        .hub-text strong { font-weight:600; text-shadow:0 1px 2px rgba(0,0,0,.55); }
         .hub-text::-webkit-scrollbar { width:5px; }
         .hub-text::-webkit-scrollbar-track { background:rgba(0,0,0,.25); border-radius:10px; }
         .hub-text::-webkit-scrollbar-thumb { background:#1ab8be; border-radius:10px; }
@@ -427,7 +427,7 @@
         .hub-lang-flags { display:flex; justify-content:center; gap:10px; margin-bottom:14px; }
         .hub-lang-content { width:100%; }
         .hub-separator { width:100%; height:1px; background:rgba(255,255,255,.25); margin:20px 0; }
-        .hub-section-title { font-size:.95rem; letter-spacing:.14em; text-transform:uppercase; color:#fff; margin-bottom:10px; font-weight:bold; text-shadow:0 1px 3px rgba(0,0,0,.5); }
+        .hub-section-title { font-size:.95rem; letter-spacing:.14em; text-transform:uppercase; color:#fff; margin-bottom:10px; font-weight:600; text-shadow:0 1px 2px rgba(0,0,0,.4); }
         .hub-team-img { width:100%; aspect-ratio:16/6.5; object-fit:cover; object-position:center 38%; margin:12px 0 16px; opacity:.97; display:block; border-radius:2px; }
         .hub-team-cols { display:flex; gap:24px; margin-bottom:4px; }
         .hub-team-col { flex:1; }
