@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>BirdHub</title>
-    <link rel="icon" type="image/png" href="../assets/ui/intro/birdhub_logo.png">
+    <link rel="icon" type="image/png" href="assets/ui/intro/birdhub_logo.png">
     <style>
         /* ── RESET ───────────────────────────────────────── */
         *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
@@ -14,12 +14,12 @@
         /* ── FONTLAR ─────────────────────────────────────── */
         @font-face {
             font-family: 'Liberation Sans';
-            src: url('../assets/ui/fonts/LiberationSans.ttf') format('truetype');
+            src: url('assets/ui/fonts/LiberationSans.ttf') format('truetype');
             font-weight: normal; font-display: swap;
         }
         @font-face {
             font-family: 'Noto Sans JP';
-            src: url('../assets/ui/fonts/NotoSansJP-Regular.ttf') format('truetype');
+            src: url('assets/ui/fonts/NotoSansJP-Regular.ttf') format('truetype');
             font-weight: normal; font-display: swap;
         }
         body { font-family: 'Liberation Sans', Arial, sans-serif; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; text-rendering:optimizeLegibility; }
@@ -74,7 +74,7 @@
         /* Hafif hareketli arka plan görseli */
         #intro-world-bg {
             position:fixed; inset:0; z-index:1; pointer-events:none;
-            background:url('../assets/ui/intro/preloader_bg.png') no-repeat center/90%;
+            background:url('assets/ui/intro/preloader_bg.png') no-repeat center/90%;
             opacity:.34;
             animation:worldDrift 18s ease-in-out infinite alternate;
         }
@@ -116,7 +116,7 @@
 
         .card-bg {
             position:absolute; inset:-40px -16px;
-            background-image:url('../assets/ui/intro/popupNoLine.png');
+            background-image:url('assets/ui/intro/popupNoLine.png');
             background-size:90% 75%; background-position:center; background-repeat:no-repeat;
             transition:filter .3s ease; z-index:0;
         }
@@ -353,8 +353,8 @@
         .base-modal { position:fixed; inset:0; background:rgba(0,0,0,.04); display:none; align-items:center; justify-content:center; z-index:2000; }
         .base-modal.active { display:flex; animation:modalFadeIn .28s ease forwards; }
         @keyframes modalFadeIn { from { opacity:0; transform:scale(.97); } to { opacity:1; transform:scale(1); } }
-        .journal-content { position:relative; width:1200px; height:680px; max-width:88vw; max-height:85vh; background:url('../assets/ui/both/journalUI.png') no-repeat center/100% 100%; padding:36px 48px; display:flex; flex-direction:column; border:none; box-shadow:none; border-radius:0; z-index:1; opacity:0.82; }
-        .modal-close { position:absolute; top:25px; right:25px; width:30px; height:30px; background:url('../assets/ui/both/buttonClose.png') no-repeat center/contain; border:none; cursor:pointer; transition:all .3s ease; z-index:20; color:transparent; }
+        .journal-content { position:relative; width:1200px; height:680px; max-width:88vw; max-height:85vh; background:url('assets/ui/both/journalUI.png') no-repeat center/100% 100%; padding:36px 48px; display:flex; flex-direction:column; border:none; box-shadow:none; border-radius:0; z-index:1; opacity:0.82; }
+        .modal-close { position:absolute; top:25px; right:25px; width:30px; height:30px; background:url('assets/ui/both/buttonClose.png') no-repeat center/contain; border:none; cursor:pointer; transition:all .3s ease; z-index:20; color:transparent; }
         .modal-close:hover { transform:scale(1.15); filter:drop-shadow(0 0 12px #1ab8be); }
         .journal-title { color:#fff; text-align:center; font-size:1.1rem; margin-bottom:8px; text-transform:uppercase; letter-spacing:2px; text-shadow:0 0 10px #1ab8be; padding-bottom:6px; }
         .journal-layout { display:flex; gap:30px; flex:1; overflow:hidden; }
@@ -401,7 +401,7 @@
         /* ── HUB MODAL ───────────────────────────────────── */
         .hub-content {
             position:relative; width:800px; height:500px;
-            background:url('../assets/ui/intro/popupNoLine.png') no-repeat center/100% 100%;
+            background:url('assets/ui/intro/popupNoLine.png') no-repeat center/100% 100%;
             display:flex; flex-direction:column; align-items:center;
             padding:38px 72px 48px; box-sizing:border-box;
             overflow-x:hidden; opacity:0.82;
@@ -443,7 +443,7 @@
             .hub-content { width:94vw; height:auto; min-height:400px; padding:36px 26px 40px; }
         }
         @media (orientation:portrait) and (max-width:768px) {
-            .journal-content { width:100%; height:100dvh; max-width:none; max-height:none; padding:48px 24px 20px; background:url('../assets/ui/intro/popupNoLine.png') no-repeat center/100% 100% !important; display:flex; flex-direction:column; overflow-y:auto; overflow-x:hidden; border-radius:0; box-sizing:border-box; }
+            .journal-content { width:100%; height:100dvh; max-width:none; max-height:none; padding:48px 24px 20px; background:url('assets/ui/intro/popupNoLine.png') no-repeat center/100% 100% !important; display:flex; flex-direction:column; overflow-y:auto; overflow-x:hidden; border-radius:0; box-sizing:border-box; }
             .hub-content { width:92vw; height:auto; min-height:360px; max-height:88dvh; padding:44px 20px 36px; overflow-y:auto; }
             .hub-logo { width:110px; margin-bottom:12px; }
             .hub-text { font-size:.86rem; }
@@ -491,7 +491,7 @@
             .main-audio-ui { top:12px; right:unset; left:50%; transform:translateX(-50%); width:max-content; }
             .base-modal { padding:0; }
             #trJournalModal, #jpJournalModal { inset:16px 12px !important; }
-            .journal-content { width:100%; height:100%; max-width:none; margin:0; padding:48px 20px 20px; background:url('../assets/ui/intro/popupNoLine.png') no-repeat center/100% 100% !important; display:flex; flex-direction:column; overflow-y:auto; overflow-x:hidden; border-radius:0; box-sizing:border-box; }
+            .journal-content { width:100%; height:100%; max-width:none; margin:0; padding:48px 20px 20px; background:url('assets/ui/intro/popupNoLine.png') no-repeat center/100% 100% !important; display:flex; flex-direction:column; overflow-y:auto; overflow-x:hidden; border-radius:0; box-sizing:border-box; }
             .modal-close { position:fixed; top:26px; right:26px; z-index:100; }
             
             #trHubModal .modal-close,
@@ -520,7 +520,7 @@
             .main-audio-ui { top:10px; right:10px; transform:scale(.75); transform-origin:top right; }
             .radio-controls-tooltip { font-size:.585rem; padding:4px 8px; }
             .speaker-tooltip { font-size:.585rem; padding:4px 8px; }
-            .journal-content { width:96vw; height:88vh; max-width:none; padding:20px 24px 16px; background:url('../assets/ui/both/journalUI.png') no-repeat center/100% 100% !important; display:flex; flex-direction:column; overflow:hidden; }
+            .journal-content { width:96vw; height:88vh; max-width:none; padding:20px 24px 16px; background:url('assets/ui/both/journalUI.png') no-repeat center/100% 100% !important; display:flex; flex-direction:column; overflow:hidden; }
             .journal-layout { flex-direction:row; gap:16px; flex:1; min-height:0; overflow:hidden; }
             .journal-left { width:49%; flex-shrink:0; overflow:hidden; padding-right:8px; }
             
@@ -595,7 +595,7 @@
 
 <!-- ── PRELOADER ─────────────────────────────────────────── -->
 <div id="bh-screen">
-    <img id="bh-logo" src="../assets/ui/intro/birdhub_logo.png" alt="BirdHub">
+    <img id="bh-logo" src="assets/ui/intro/birdhub_logo.png" alt="BirdHub">
     <div id="bh-tagline" style="margin-top:1em; line-height:2;">
         <span style="display:block;"><b>LIVE</b> SOUNDSCAPES AND BIRD LIFE</span>
         <span style="display:block;">CONNECTED IN <b>REAL TIME</b></span>
@@ -628,8 +628,8 @@
             <div class="card-bg"></div>
             <div class="card-content">
                 <div class="scene-preview-box">
-                    <img src="../assets/ui/intro/TRScene.png" alt="Turkey Scene" class="preview-image">
-                    <div class="university-logo"><img src="../assets/ui/intro/ytu.png" alt="YTÜ"></div>
+                    <img src="assets/ui/intro/TRScene.png" alt="Turkey Scene" class="preview-image">
+                    <div class="university-logo"><img src="assets/ui/intro/ytu.png" alt="YTÜ"></div>
                 </div>
                 <div class="text-container">
                     <div id="tr-side-text" class="side-title">
@@ -654,8 +654,8 @@
             <div class="card-bg"></div>
             <div class="card-content">
                 <div class="scene-preview-box">
-                    <img src="../assets/ui/intro/JPScene.png" alt="Japan Scene" class="preview-image">
-                    <div class="university-logo"><img src="../assets/ui/intro/jp.png" alt="Tokyo U"></div>
+                    <img src="assets/ui/intro/JPScene.png" alt="Japan Scene" class="preview-image">
+                    <div class="university-logo"><img src="assets/ui/intro/jp.png" alt="Tokyo U"></div>
                 </div>
                 <div class="text-container">
                     <div id="jp-side-text" class="side-title">
@@ -687,7 +687,7 @@
 
     <!-- Main audio UI -->
     <div class="main-audio-ui" id="trAudioUI">
-        <img src="../assets/ui/tr/radio/seshopo.png" class="main-audio-icon" id="trAudioIcon">
+        <img src="assets/ui/tr/radio/seshopo.png" class="main-audio-icon" id="trAudioIcon">
         <div class="main-spectrum-container" id="trSpectrumContainer">
             <div class="wave-base"><div class="horizontal-wave wave-1"></div><div class="horizontal-wave wave-2"></div></div>
             <div class="wave-fill" id="trWaveFill"><div class="horizontal-wave wave-1"></div><div class="horizontal-wave wave-2"></div></div>
@@ -696,33 +696,33 @@
     </div>
 
     <div class="scene-wrapper">
-        <video class="scene-video" id="vtr" autoplay loop muted playsinline poster="../assets/ui/intro/TRScene.png"></video>
-        <img src="../assets/ui/tr/girl.png" alt="Girl" class="girl-character">
+        <video class="scene-video" id="vtr" autoplay loop muted playsinline poster="assets/ui/intro/TRScene.png"></video>
+        <img src="assets/ui/tr/girl.png" alt="Girl" class="girl-character">
         <div class="book-wrapper" id="trBookWrapper">
-            <img src="../assets/ui/tr/defter.png" class="book-base">
+            <img src="assets/ui/tr/defter.png" class="book-base">
             <div class="book-holo-container" id="trBookHolo">
-                <img src="../assets/ui/both/defterholo.png" class="book-holo">
-                <img src="../assets/ui/both/defterholokus.png" class="book-bird">
+                <img src="assets/ui/both/defterholo.png" class="book-holo">
+                <img src="assets/ui/both/defterholokus.png" class="book-bird">
             </div>
         </div>
         <div class="hub-wrapper" id="trHubWrapper">
-            <img src="../assets/ui/tr/hub.png" class="hub-base">
-            <img src="../assets/ui/both/hubholo.png" class="hub-holo">
+            <img src="assets/ui/tr/hub.png" class="hub-base">
+            <img src="assets/ui/both/hubholo.png" class="hub-holo">
         </div>
         <div class="radio-device-wrapper">
-            <img src="../assets/ui/both/radio/govde.png" class="radio-govde" style="opacity:0;pointer-events:none;">
+            <img src="assets/ui/both/radio/govde.png" class="radio-govde" style="opacity:0;pointer-events:none;">
             <div class="speaker-hover-zone">
-                <img src="../assets/ui/both/speaker.png">
+                <img src="assets/ui/both/speaker.png">
 
             </div>
             <div class="speaker-wave-right wave-group"><div class="radio-wave wave1"></div><div class="radio-wave wave2"></div><div class="radio-wave wave3"></div></div>
             <div class="radio-controls-zone">
-                <img src="../assets/ui/tr/radio/holo.png" class="radio-holo">
-                <img src="../assets/ui/tr/radio/flag.png" class="radio-bayrak" id="trRadioBayrak">
-                <img src="../assets/ui/both/radio/sesy.png" class="radio-ses" id="trRadioSes">
+                <img src="assets/ui/tr/radio/holo.png" class="radio-holo">
+                <img src="assets/ui/tr/radio/flag.png" class="radio-bayrak" id="trRadioBayrak">
+                <img src="assets/ui/both/radio/sesy.png" class="radio-ses" id="trRadioSes">
                 <div class="radio-volume-container" id="trVolumeContainer">
-                    <img src="../assets/ui/tr/radio/volumeB.png" class="volume-base">
-                    <img src="../assets/ui/tr/radio/volumeF.png" class="volume-fill" id="trVolumeFill">
+                    <img src="assets/ui/tr/radio/volumeB.png" class="volume-base">
+                    <img src="assets/ui/tr/radio/volumeF.png" class="volume-fill" id="trVolumeFill">
                 </div>
                 <span class="radio-controls-tooltip" id="trControlsTooltip">Remote Livestream</span>
             </div>
@@ -742,7 +742,7 @@
                 <div class="journal-right" id="trBirdDetails" style="display:none">
                     <div class="bird-image-container" style="position:relative;">
                         <img src="" alt="Bird" id="trBirdImg" class="bird-large-img">
-                        <img src="../assets/ui/both/icon-bothcountries.png" class="both-campus-icon" id="trBothIcon" alt="Observed in both countries">
+                        <img src="assets/ui/both/icon-bothcountries.png" class="both-campus-icon" id="trBothIcon" alt="Observed in both countries">
                         <div class="both-campus-tooltip" id="trBothTooltip">
                             <span data-lang="en">Seen in both countries</span>
                             <span data-lang="tr" style="display:none">Her iki ülkede görülür</span>
@@ -751,7 +751,7 @@
                     </div>
                     <div class="bird-header">
                         <div class="bird-title-row">
-                            <img src="../assets/ui/both/volPlay.png" class="bird-audio-btn" id="trBirdAudioBtn">
+                            <img src="assets/ui/both/volPlay.png" class="bird-audio-btn" id="trBirdAudioBtn">
                             <h3 class="bird-name-en" id="trBirdNameEn">Name</h3>
                         </div>
                         <div class="bird-subtitle-row">
@@ -777,7 +777,7 @@
     <div class="base-modal" id="trHubModal">
         <div class="hub-content">
             <button class="modal-close" id="trHubClose"></button>
-            <img src="../assets/ui/intro/birdhub_logo.png" class="hub-logo" alt="BirdHub">
+            <img src="assets/ui/intro/birdhub_logo.png" class="hub-logo" alt="BirdHub">
             <div class="hub-lang-flags" id="trHubLangFlags">
                 <button class="flag-btn active" data-hub-lang="en"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60" preserveAspectRatio="xMidYMid slice"><rect x="-10" y="-10" width="80" height="80" fill="#012169"/><path d="M0,0 L60,60 M60,0 L0,60" stroke="#fff" stroke-width="8"/><path d="M0,0 L60,60 M60,0 L0,60" stroke="#C8102E" stroke-width="4"/><path d="M30,0 v60 M0,30 h60" stroke="#fff" stroke-width="14"/><path d="M30,0 v60 M0,30 h60" stroke="#C8102E" stroke-width="8"/></svg></button>
                 <button class="flag-btn" data-hub-lang="tr"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" preserveAspectRatio="xMidYMid slice"><rect width="120" height="120" fill="#E30A17"/><g transform="translate(56,60) scale(0.85)"><circle cx="-15" cy="0" r="30" fill="#fff"/><circle cx="-7.5" cy="0" r="24" fill="#E30A17"/><g transform="translate(21,0) scale(12) rotate(90)"><polygon points="0,-1 0.5878,0.809 -0.9511,-0.309 0.9511,-0.309 -0.5878,0.809" fill="#fff"/></g></g></svg></button>
@@ -836,7 +836,7 @@
                     <p>Kobayashi Labにおけるサウンドスケープ研究との継続的な対話を基盤として、この協働はその探究を環境音のリスニング、キャンパスにおける鳥類多様性、そして離れた場所同士のつながりに焦点を当てたデザイン実践へと発展させています。</p>
                 </div>
 
-                <img src="../assets/ui/intro/preloader_bg.png" class="hub-team-img" alt="">
+                <img src="assets/ui/intro/preloader_bg.png" class="hub-team-img" alt="">
 
                 <div class="hub-team-cols">
                     <div class="hub-team-col hub-team-col-left">
@@ -1012,7 +1012,7 @@
 
     <!-- Main audio UI -->
     <div class="main-audio-ui" id="jpAudioUI">
-        <img src="../assets/ui/jp/radio/seshopo.png" class="main-audio-icon" id="jpAudioIcon">
+        <img src="assets/ui/jp/radio/seshopo.png" class="main-audio-icon" id="jpAudioIcon">
         <div class="main-spectrum-container" id="jpSpectrumContainer">
             <div class="wave-base"><div class="horizontal-wave wave-1"></div><div class="horizontal-wave wave-2"></div></div>
             <div class="wave-fill" id="jpWaveFill"><div class="horizontal-wave wave-1"></div><div class="horizontal-wave wave-2"></div></div>
@@ -1021,33 +1021,33 @@
     </div>
 
     <div class="scene-wrapper">
-        <video class="scene-video" id="vjp" autoplay loop muted playsinline poster="../assets/ui/intro/JPScene.png"></video>
-        <img src="../assets/ui/jp/man.png" alt="Man" class="man-character">
+        <video class="scene-video" id="vjp" autoplay loop muted playsinline poster="assets/ui/intro/JPScene.png"></video>
+        <img src="assets/ui/jp/man.png" alt="Man" class="man-character">
         <div class="book-wrapper" id="jpBookWrapper">
-            <img src="../assets/ui/jp/defter.png" class="book-base">
+            <img src="assets/ui/jp/defter.png" class="book-base">
             <div class="book-holo-container" id="jpBookHolo">
-                <img src="../assets/ui/both/defterholo.png" class="book-holo">
-                <img src="../assets/ui/both/defterholokus.png" class="book-bird">
+                <img src="assets/ui/both/defterholo.png" class="book-holo">
+                <img src="assets/ui/both/defterholokus.png" class="book-bird">
             </div>
         </div>
         <div class="hub-portal-wrapper" id="jpHubWrapper">
-            <img src="../assets/ui/both/hubholo.png" class="hub-portal-holo">
+            <img src="assets/ui/both/hubholo.png" class="hub-portal-holo">
         </div>
-        <img src="../assets/ui/jp/hub.png" class="jp-hub-lotus" id="jpHubLotus">
+        <img src="assets/ui/jp/hub.png" class="jp-hub-lotus" id="jpHubLotus">
         <div class="radio-device-wrapper">
-            <img src="../assets/ui/both/radio/govde.png" class="radio-govde" style="opacity:0;pointer-events:none;">
+            <img src="assets/ui/both/radio/govde.png" class="radio-govde" style="opacity:0;pointer-events:none;">
             <div class="speaker-hover-zone">
-                <img src="../assets/ui/both/speaker.png">
+                <img src="assets/ui/both/speaker.png">
 
             </div>
             <div class="speaker-wave-right wave-group"><div class="radio-wave wave1"></div><div class="radio-wave wave2"></div><div class="radio-wave wave3"></div></div>
             <div class="radio-controls-zone">
-                <img src="../assets/ui/tr/radio/holo.png" class="radio-holo">
-                <img src="../assets/ui/jp/radio/flag.png" class="radio-bayrak" id="jpRadioBayrak">
-                <img src="../assets/ui/both/radio/sesy.png" class="radio-ses" id="jpRadioSes">
+                <img src="assets/ui/tr/radio/holo.png" class="radio-holo">
+                <img src="assets/ui/jp/radio/flag.png" class="radio-bayrak" id="jpRadioBayrak">
+                <img src="assets/ui/both/radio/sesy.png" class="radio-ses" id="jpRadioSes">
                 <div class="radio-volume-container" id="jpVolumeContainer">
-                    <img src="../assets/ui/tr/radio/volumeB.png" class="volume-base">
-                    <img src="../assets/ui/tr/radio/volumeF.png" class="volume-fill" id="jpVolumeFill">
+                    <img src="assets/ui/tr/radio/volumeB.png" class="volume-base">
+                    <img src="assets/ui/tr/radio/volumeF.png" class="volume-fill" id="jpVolumeFill">
                 </div>
                 <span class="radio-controls-tooltip" id="jpControlsTooltip">Remote Livestream</span>
             </div>
@@ -1067,7 +1067,7 @@
                 <div class="journal-right" id="jpBirdDetails" style="display:none">
                     <div class="bird-image-container" style="position:relative;">
                         <img src="" alt="Bird" id="jpBirdImg" class="bird-large-img">
-                        <img src="../assets/ui/both/icon-bothcountries.png" class="both-campus-icon" id="jpBothIcon" alt="Observed in both countries">
+                        <img src="assets/ui/both/icon-bothcountries.png" class="both-campus-icon" id="jpBothIcon" alt="Observed in both countries">
                         <div class="both-campus-tooltip" id="jpBothTooltip">
                             <span data-lang="en">Seen in both countries</span>
                             <span data-lang="tr" style="display:none">Her iki ülkede görülür</span>
@@ -1076,7 +1076,7 @@
                     </div>
                     <div class="bird-header">
                         <div class="bird-title-row">
-                            <img src="../assets/ui/both/volPlay.png" class="bird-audio-btn" id="jpBirdAudioBtn">
+                            <img src="assets/ui/both/volPlay.png" class="bird-audio-btn" id="jpBirdAudioBtn">
                             <h3 class="bird-name-en" id="jpBirdNameEn">Name</h3>
                         </div>
                         <div class="bird-subtitle-row">
@@ -1102,7 +1102,7 @@
     <div class="base-modal" id="jpHubModal">
         <div class="hub-content">
             <button class="modal-close" id="jpHubClose"></button>
-            <img src="../assets/ui/intro/birdhub_logo.png" class="hub-logo" alt="BirdHub">
+            <img src="assets/ui/intro/birdhub_logo.png" class="hub-logo" alt="BirdHub">
             <div class="hub-lang-flags" id="jpHubLangFlags">
                 <button class="flag-btn active" data-hub-lang="en"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60" preserveAspectRatio="xMidYMid slice"><rect x="-10" y="-10" width="80" height="80" fill="#012169"/><path d="M0,0 L60,60 M60,0 L0,60" stroke="#fff" stroke-width="8"/><path d="M0,0 L60,60 M60,0 L0,60" stroke="#C8102E" stroke-width="4"/><path d="M30,0 v60 M0,30 h60" stroke="#fff" stroke-width="14"/><path d="M30,0 v60 M0,30 h60" stroke="#C8102E" stroke-width="8"/></svg></button>
                 <button class="flag-btn" data-hub-lang="tr"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" preserveAspectRatio="xMidYMid slice"><rect width="120" height="120" fill="#E30A17"/><g transform="translate(56,60) scale(0.85)"><circle cx="-15" cy="0" r="30" fill="#fff"/><circle cx="-7.5" cy="0" r="24" fill="#E30A17"/><g transform="translate(21,0) scale(12) rotate(90)"><polygon points="0,-1 0.5878,0.809 -0.9511,-0.309 0.9511,-0.309 -0.5878,0.809" fill="#fff"/></g></g></svg></button>
@@ -1161,7 +1161,7 @@
                     <p>Kobayashi Labにおけるサウンドスケープ研究との継続的な対話を基盤として、この協働はその探究を環境音のリスニング、キャンパスにおける鳥類多様性、そして離れた場所同士のつながりに焦点を当てたデザイン実践へと発展させています。</p>
                 </div>
 
-                <img src="../assets/ui/intro/preloader_bg.png" class="hub-team-img" alt="">
+                <img src="assets/ui/intro/preloader_bg.png" class="hub-team-img" alt="">
 
                 <div class="hub-team-cols">
                     <div class="hub-team-col hub-team-col-left">
@@ -1596,8 +1596,8 @@ var BH = (function () {
         var scene = _current === 'japan' ? 'japan' : 'turkey';
         if (_birdsCache[scene]) { cb(_birdsCache[scene]); return; }
         var url = scene === 'japan'
-            ? '../assets/data/json/birds_jp.json'
-            : '../assets/data/json/birds_tr.json';
+            ? 'assets/data/json/birds_jp.json'
+            : 'assets/data/json/birds_tr.json';
         fetch(url)
             .then(function(r){ return r.json(); })
             .then(function(d){ _birdsCache[scene] = d; cb(d); })
@@ -1683,12 +1683,12 @@ var BH = (function () {
             // Play btn → full XenoCanto recording, auto-play on select
             state.audio.pause();
             state.audio.src = bird.xeno || bird.voice;
-            els.audioBtn.src = '../assets/ui/both/volPlay.png';
+            els.audioBtn.src = 'assets/ui/both/volPlay.png';
 
             // Auto-play xeno recording immediately on bird select
             if (playPreview && (bird.xeno || bird.voice)) {
                 state.audio.play().catch(function(){});
-                els.audioBtn.src = '../assets/ui/both/volPause.png';
+                els.audioBtn.src = 'assets/ui/both/volPause.png';
             }
             _updateDesc();
         }
@@ -1751,10 +1751,10 @@ var BH = (function () {
 
         els.audioBtn.addEventListener('click', function() {
             if (!state.audio.src) return;
-            if (state.audio.paused) { state.audio.play().catch(function(){}); els.audioBtn.src = '../assets/ui/both/volPause.png'; }
-            else { state.audio.pause(); els.audioBtn.src = '../assets/ui/both/volPlay.png'; }
+            if (state.audio.paused) { state.audio.play().catch(function(){}); els.audioBtn.src = 'assets/ui/both/volPause.png'; }
+            else { state.audio.pause(); els.audioBtn.src = 'assets/ui/both/volPlay.png'; }
         });
-        state.audio.addEventListener('ended', function(){ els.audioBtn.src = '../assets/ui/both/volPlay.png'; });
+        state.audio.addEventListener('ended', function(){ els.audioBtn.src = 'assets/ui/both/volPlay.png'; });
         els.flags && els.flags.querySelectorAll('.flag-btn').forEach(function(btn) {
             btn.addEventListener('click', function(e) {
                 var t = e.target.closest('.flag-btn');
@@ -1793,7 +1793,7 @@ var BH = (function () {
         }
 
         return {
-            stop: function() { state.audio.pause(); els.audioBtn.src = '../assets/ui/both/volPlay.png'; },
+            stop: function() { state.audio.pause(); els.audioBtn.src = 'assets/ui/both/volPlay.png'; },
             syncFlags: _syncFlags,
             updateDesc: _updateDesc
         };
@@ -1849,7 +1849,7 @@ var BH = (function () {
         function _ui() {
             var v = state.muted ? 0 : state.vol, ri = 100 - v*100;
             cfg.volumeFillEl.style.clipPath = 'inset(0 '+ri+'% 0 0)';
-            cfg.sesEl.src = (!state.muted && state.vol > 0) ? '../assets/ui/both/radio/sesy.png' : '../assets/ui/both/radio/sesn.png';
+            cfg.sesEl.src = (!state.muted && state.vol > 0) ? 'assets/ui/both/radio/sesy.png' : 'assets/ui/both/radio/sesn.png';
             cfg.waveGroups.forEach(function(el){ el.classList.toggle('playing', !state.muted && state.vol >= 0.02); });
         }
 
@@ -1918,7 +1918,7 @@ var BH = (function () {
         function _ui() {
             var v = state.muted ? 0 : state.vol, ri = 100 - v*100;
             cfg.waveFillEl.style.clipPath = 'inset(0 '+ri+'% 0 0)';
-            cfg.iconEl.src = (!state.muted && state.vol > 0) ? cfg.activeIcon : '../assets/ui/both/radio/sesn.png';
+            cfg.iconEl.src = (!state.muted && state.vol > 0) ? cfg.activeIcon : 'assets/ui/both/radio/sesn.png';
             var amp = (!state.muted && state.vol > 0) ? (0.25 + state.vol*0.25) : 0.15;
             cfg.spectrumEl.style.setProperty('--wave-amp', amp);
             // Show UI (hidden until audio is ready)
@@ -2070,7 +2070,7 @@ var BH = (function () {
         // Play background video
         var vtr = document.getElementById('vtr');
         if (_vtrUrl && !vtr.dataset.blobReady) { vtr.src = _vtrUrl; vtr.dataset.blobReady = '1'; }
-        else if (!_vtrUrl && !vtr.src) { vtr.src = '../assets/ui/bg/tr.webm'; }
+        else if (!_vtrUrl && !vtr.src) { vtr.src = 'assets/ui/bg/tr.webm'; }
         vtr.play().catch(function(){});
 
         if (_trInit && _trControllers) {
@@ -2135,7 +2135,7 @@ var BH = (function () {
                 waveFillEl: document.getElementById('trWaveFill'),
                 uiEl: document.getElementById('trAudioUI'),
                 storeKey: 'ytu_main_vol',
-                activeIcon: '../assets/ui/tr/radio/seshopo.png'
+                activeIcon: 'assets/ui/tr/radio/seshopo.png'
             })
         };
 
@@ -2148,7 +2148,7 @@ var BH = (function () {
     function _startJapan() {
         var vjp = document.getElementById('vjp');
         if (_vjpUrl && !vjp.dataset.blobReady) { vjp.src = _vjpUrl; vjp.dataset.blobReady = '1'; }
-        else if (!_vjpUrl && !vjp.src) { vjp.src = '../assets/ui/bg/jp.webm'; }
+        else if (!_vjpUrl && !vjp.src) { vjp.src = 'assets/ui/bg/jp.webm'; }
         vjp.play().catch(function(){});
 
         if (_jpInit && _jpControllers) {
@@ -2232,7 +2232,7 @@ var BH = (function () {
                 waveFillEl: document.getElementById('jpWaveFill'),
                 uiEl: document.getElementById('jpAudioUI'),
                 storeKey: 'jp_main_vol',
-                activeIcon: '../assets/ui/jp/radio/seshopo.png'
+                activeIcon: 'assets/ui/jp/radio/seshopo.png'
             })
         };
 
@@ -2269,211 +2269,211 @@ var BH = (function () {
     function _preload(initialPage) {
         var IMAGES = [
             // intro
-            "../assets/ui/intro/birdhub_logo.png",
-            "../assets/ui/intro/preloader_bg.png",
-            "../assets/ui/intro/TRScene.png",
-            "../assets/ui/intro/JPScene.png",
-            "../assets/ui/intro/ytu.png",
-            "../assets/ui/intro/jp.png",
-            "../assets/ui/intro/popupNoLine.png",
+            "assets/ui/intro/birdhub_logo.png",
+            "assets/ui/intro/preloader_bg.png",
+            "assets/ui/intro/TRScene.png",
+            "assets/ui/intro/JPScene.png",
+            "assets/ui/intro/ytu.png",
+            "assets/ui/intro/jp.png",
+            "assets/ui/intro/popupNoLine.png",
             // both
-            "../assets/ui/both/journalUI.png",
-            "../assets/ui/both/icon-bothcountries.png",
-            "../assets/ui/both/volPlay.png",
-            "../assets/ui/both/volPause.png",
-            "../assets/ui/both/buttonClose.png",
-            "../assets/ui/both/defterholo.png",
-            "../assets/ui/both/defterholokus.png",
-            "../assets/ui/both/hubholo.png",
-            "../assets/ui/both/radio/govde.png",
-            "../assets/ui/both/radio/sesy.png",
-            "../assets/ui/both/radio/sesn.png",
+            "assets/ui/both/journalUI.png",
+            "assets/ui/both/icon-bothcountries.png",
+            "assets/ui/both/volPlay.png",
+            "assets/ui/both/volPause.png",
+            "assets/ui/both/buttonClose.png",
+            "assets/ui/both/defterholo.png",
+            "assets/ui/both/defterholokus.png",
+            "assets/ui/both/hubholo.png",
+            "assets/ui/both/radio/govde.png",
+            "assets/ui/both/radio/sesy.png",
+            "assets/ui/both/radio/sesn.png",
             // tr
-            "../assets/ui/tr/girl.png",
-            "../assets/ui/tr/defter.png",
-            "../assets/ui/tr/hub.png",
-            "../assets/ui/tr/radio/holo.png",
-            "../assets/ui/tr/radio/flag.png",
-            "../assets/ui/tr/radio/volumeB.png",
-            "../assets/ui/tr/radio/volumeF.png",
-            "../assets/ui/tr/radio/seshopo.png",
+            "assets/ui/tr/girl.png",
+            "assets/ui/tr/defter.png",
+            "assets/ui/tr/hub.png",
+            "assets/ui/tr/radio/holo.png",
+            "assets/ui/tr/radio/flag.png",
+            "assets/ui/tr/radio/volumeB.png",
+            "assets/ui/tr/radio/volumeF.png",
+            "assets/ui/tr/radio/seshopo.png",
             // jp
-            "../assets/ui/jp/man.png",
-            "../assets/ui/jp/defter.png",
-            "../assets/ui/jp/hub.png",
-            "../assets/ui/jp/radio/holo.png",
-            "../assets/ui/jp/radio/flag.png",
-            "../assets/ui/jp/radio/volumeB.png",
-            "../assets/ui/jp/radio/volumeF.png",
-            "../assets/ui/jp/radio/seshopo.png",
-            "../assets/data/images/Barn_swallow.png",
-            "../assets/data/images/Blackbird.png",
-            "../assets/data/images/Blackcap.png",
-            "../assets/data/images/Brambling.png",
-            "../assets/data/images/Brown-eared_Bulbul.png",
-            "../assets/data/images/Bull-headed_Shrike.png",
-            "../assets/data/images/Chinese_bamboo_partridge.png",
-            "../assets/data/images/Common_Chiffchaff.png",
-            "../assets/data/images/Common_Hoopoe.png",
-            "../assets/data/images/Common_Nightingale.png",
-            "../assets/data/images/Common_Redstart.png",
-            "../assets/data/images/Common_kingfisher.png",
-            "../assets/data/images/Dusky_Thrush.png",
-            "../assets/data/images/Eurasian_Nuthatch.png",
-            "../assets/data/images/Eurasian_Siskin.png",
-            "../assets/data/images/Eurasian_Wren.png",
-            "../assets/data/images/Eurasian_bluetit.png",
-            "../assets/data/images/Eurasian_jackdaw.png",
-            "../assets/data/images/Eurasian_jay.png",
-            "../assets/data/images/Eurasian_magpie.png",
-            "../assets/data/images/Eurasian_sparrowhawk.png",
-            "../assets/data/images/European_Bee-eater.png",
-            "../assets/data/images/European_goldfinch.png",
-            "../assets/data/images/European_greenfinch.png",
-            "../assets/data/images/European_robin.png",
-            "../assets/data/images/Goldcrest.png",
-            "../assets/data/images/Great_Tit.png",
-            "../assets/data/images/Grey_heron.png",
-            "../assets/data/images/Grey_wagtail.png",
-            "../assets/data/images/Hawfinch.png",
-            "../assets/data/images/Japanese_Bush_Warbler.png",
-            "../assets/data/images/Japanese_White-eye.png",
-            "../assets/data/images/Japanese_sparrowhawk.png",
-            "../assets/data/images/Japanese_thrush.png",
-            "../assets/data/images/Japanese_tit.png",
-            "../assets/data/images/Long-tailed_tit.png",
-            "../assets/data/images/Pale_Thrush.png",
-            "../assets/data/images/Rose-ringed_Parakeet.png",
-            "../assets/data/images/Song_Thrush.png",
-            "../assets/data/images/Spotted_Flycatcher.png",
-            "../assets/data/images/Syrian_woodpecker.png",
-            "../assets/data/images/Tree_sparrow.png",
-            "../assets/data/images/White_s_Thrush.png",
-            "../assets/data/images/White_wagtail.png",
-            "../assets/data/images/Willow_Warbler.png",
-            "../assets/data/images/alexandrine_parakeet.png",
-            "../assets/data/images/alpine_swift.png",
-            "../assets/data/images/azure-winged_magpie.png",
-            "../assets/data/images/black-faced_bunting.png",
-            "../assets/data/images/blackKite.png",
-            "../assets/data/images/brown_thrush.png",
-            "../assets/data/images/carrion_crow.png",
-            "../assets/data/images/coal_tit.png",
-            "../assets/data/images/collard_flycatcher.png",
-            "../assets/data/images/common_buzzard.png",
-            "../assets/data/images/common_chaffinch.png",
-            "../assets/data/images/common_raven.png",
-            "../assets/data/images/daurian_redstart.png",
-            "../assets/data/images/eastern_buzzard.png",
-            "../assets/data/images/great_egret.png",
-            "../assets/data/images/green_pheasant.png",
-            "../assets/data/images/grey_bunting.png",
-            "../assets/data/images/grey_starling.png",
-            "../assets/data/images/hooded_crow.png",
-            "../assets/data/images/houseSparrow.png",
-            "../assets/data/images/jungle_crow.png",
-            "../assets/data/images/little_owl.png",
-            "../assets/data/images/narcissus_flycatcher.png",
-            "../assets/data/images/olive-backed_pipit.png",
-            "../assets/data/images/oriental_greenfinch.png",
-            "../assets/data/images/oriental_turtle_dove.png",
-            "../assets/data/images/redbreasted_flycatcher.png",
-            "../assets/data/images/rook.png",
-            "../assets/data/images/rustic_bunting.png",
-            "../assets/data/images/spot-billed_duck.png",
-            "../assets/data/images/starling.png",
-            "../assets/data/images/ural_owl.png",
-            "../assets/data/images/varied_tit.png",
-            "../assets/data/images/white_stork.png",
-            "../assets/data/images/yellow-legged_gull.png"
+            "assets/ui/jp/man.png",
+            "assets/ui/jp/defter.png",
+            "assets/ui/jp/hub.png",
+            "assets/ui/jp/radio/holo.png",
+            "assets/ui/jp/radio/flag.png",
+            "assets/ui/jp/radio/volumeB.png",
+            "assets/ui/jp/radio/volumeF.png",
+            "assets/ui/jp/radio/seshopo.png",
+            "assets/data/images/Barn_swallow.png",
+            "assets/data/images/Blackbird.png",
+            "assets/data/images/Blackcap.png",
+            "assets/data/images/Brambling.png",
+            "assets/data/images/Brown-eared_Bulbul.png",
+            "assets/data/images/Bull-headed_Shrike.png",
+            "assets/data/images/Chinese_bamboo_partridge.png",
+            "assets/data/images/Common_Chiffchaff.png",
+            "assets/data/images/Common_Hoopoe.png",
+            "assets/data/images/Common_Nightingale.png",
+            "assets/data/images/Common_Redstart.png",
+            "assets/data/images/Common_kingfisher.png",
+            "assets/data/images/Dusky_Thrush.png",
+            "assets/data/images/Eurasian_Nuthatch.png",
+            "assets/data/images/Eurasian_Siskin.png",
+            "assets/data/images/Eurasian_Wren.png",
+            "assets/data/images/Eurasian_bluetit.png",
+            "assets/data/images/Eurasian_jackdaw.png",
+            "assets/data/images/Eurasian_jay.png",
+            "assets/data/images/Eurasian_magpie.png",
+            "assets/data/images/Eurasian_sparrowhawk.png",
+            "assets/data/images/European_Bee-eater.png",
+            "assets/data/images/European_goldfinch.png",
+            "assets/data/images/European_greenfinch.png",
+            "assets/data/images/European_robin.png",
+            "assets/data/images/Goldcrest.png",
+            "assets/data/images/Great_Tit.png",
+            "assets/data/images/Grey_heron.png",
+            "assets/data/images/Grey_wagtail.png",
+            "assets/data/images/Hawfinch.png",
+            "assets/data/images/Japanese_Bush_Warbler.png",
+            "assets/data/images/Japanese_White-eye.png",
+            "assets/data/images/Japanese_sparrowhawk.png",
+            "assets/data/images/Japanese_thrush.png",
+            "assets/data/images/Japanese_tit.png",
+            "assets/data/images/Long-tailed_tit.png",
+            "assets/data/images/Pale_Thrush.png",
+            "assets/data/images/Rose-ringed_Parakeet.png",
+            "assets/data/images/Song_Thrush.png",
+            "assets/data/images/Spotted_Flycatcher.png",
+            "assets/data/images/Syrian_woodpecker.png",
+            "assets/data/images/Tree_sparrow.png",
+            "assets/data/images/White_s_Thrush.png",
+            "assets/data/images/White_wagtail.png",
+            "assets/data/images/Willow_Warbler.png",
+            "assets/data/images/alexandrine_parakeet.png",
+            "assets/data/images/alpine_swift.png",
+            "assets/data/images/azure-winged_magpie.png",
+            "assets/data/images/black-faced_bunting.png",
+            "assets/data/images/blackKite.png",
+            "assets/data/images/brown_thrush.png",
+            "assets/data/images/carrion_crow.png",
+            "assets/data/images/coal_tit.png",
+            "assets/data/images/collard_flycatcher.png",
+            "assets/data/images/common_buzzard.png",
+            "assets/data/images/common_chaffinch.png",
+            "assets/data/images/common_raven.png",
+            "assets/data/images/daurian_redstart.png",
+            "assets/data/images/eastern_buzzard.png",
+            "assets/data/images/great_egret.png",
+            "assets/data/images/green_pheasant.png",
+            "assets/data/images/grey_bunting.png",
+            "assets/data/images/grey_starling.png",
+            "assets/data/images/hooded_crow.png",
+            "assets/data/images/houseSparrow.png",
+            "assets/data/images/jungle_crow.png",
+            "assets/data/images/little_owl.png",
+            "assets/data/images/narcissus_flycatcher.png",
+            "assets/data/images/olive-backed_pipit.png",
+            "assets/data/images/oriental_greenfinch.png",
+            "assets/data/images/oriental_turtle_dove.png",
+            "assets/data/images/redbreasted_flycatcher.png",
+            "assets/data/images/rook.png",
+            "assets/data/images/rustic_bunting.png",
+            "assets/data/images/spot-billed_duck.png",
+            "assets/data/images/starling.png",
+            "assets/data/images/ural_owl.png",
+            "assets/data/images/varied_tit.png",
+            "assets/data/images/white_stork.png",
+            "assets/data/images/yellow-legged_gull.png"
         ];
 
         var XENO = [
-            '../assets/data/xeno/XC1001933-Milvus-migrans-ID48.mp3',
-            '../assets/data/xeno/XC1003433-Sturnus-vulgaris-ID40.mp3',
-            '../assets/data/xeno/XC1020499-Hirundo-rustica-ID3.mp3',
-            '../assets/data/xeno/XC1024253-Corvus-frugilegus-ID36.mp3',
-            '../assets/data/xeno/XC1029700-Upupa-epops-ID11.mp3',
-            '../assets/data/xeno/XC1036835-Corvus-corone-ID53.mp3',
-            '../assets/data/xeno/XC1044078-Psittacula-eupatria-ID1.mp3',
-            '../assets/data/xeno/XC1046013-Psittacula-krameri-ID37.mp3',
-            '../assets/data/xeno/XC1052241-Buteo-buteo-ID8.mp3',
-            '../assets/data/xeno/XC1070806-Corvus-corax-ID14.mp3',
-            '../assets/data/xeno/XC1072048-Periparus-ater-ID55.mp3',
-            '../assets/data/xeno/XC1075277-Luscinia-megarhynchos-ID13.mp3',
-            '../assets/data/xeno/XC1075414-Troglodytes-troglodytes-ID21.mp3',
-            '../assets/data/xeno/XC1076066-Sylvia-atricapilla-ID5.mp3',
-            '../assets/data/xeno/XC1076083-Motacilla-cinerea-ID29.mp3',
-            '../assets/data/xeno/XC1077472-Sitta-europaea-ID60.mp3',
-            '../assets/data/xeno/XC1079914-Fringilla-montifringilla-ID6.mp3',
-            '../assets/data/xeno/XC1079999-Phylloscopus-trochilus-ID45.mp3',
-            '../assets/data/xeno/XC1080027-Phoenicurus-phoenicurus-ID15.mp3',
-            '../assets/data/xeno/XC1080501-Turdus-philomelos-ID38.mp3',
-            '../assets/data/xeno/XC1082804-Strix-uralensis-ID78.mp3',
-            '../assets/data/xeno/XC1083558-Cyanistes-caeruleus-ID16.mp3',
-            '../assets/data/xeno/XC1085465-Phylloscopus-collybita-ID10.mp3',
-            '../assets/data/xeno/XC1088124-HoodedCrow-Corvuscornix_ID31.mp3',
-            '../assets/data/xeno/XC1088279-Passer-domesticus-ID32.mp3',
-            '../assets/data/xeno/XC1103515-Tachymarptis-melba-ID2.mp3',
-            '../assets/data/xeno/XC1103936-Ciconia-ciconia-ID43.mp3',
-            '../assets/data/xeno/XC1104628-Erithacus-rubecula-ID25.mp3',
-            '../assets/data/xeno/XC1106173-Parus-major-ID27.mp3',
-            '../assets/data/xeno/XC1106637-Fringilla-coelebs-ID9.mp3',
-            '../assets/data/xeno/XC1107554-Chloris-chloris-ID24.mp3',
-            '../assets/data/xeno/XC1136220-Turdus-merula-ID4.mp3',
-            '../assets/data/xeno/XC175812-Cyanopica-cyanus-ID47.mp3',
-            '../assets/data/xeno/XC210479-Coccothraustes-coccothraustes-ID30.mp3',
-            '../assets/data/xeno/XC236705-Zoothera-aurea-ID80.mp3',
-            '../assets/data/xeno/XC282185-Phasianus-versicolor-ID62.mp3',
-            '../assets/data/xeno/XC285694-Horornis-diphone-ID65.mp3',
-            '../assets/data/xeno/XC285710-Turdus-cardis-ID67.mp3',
-            '../assets/data/xeno/XC285803-Turdus-chrysolaus-ID50.mp3',
-            '../assets/data/xeno/XC285804-Sittiparus-varius-ID79.mp3',
-            '../assets/data/xeno/XC285949-Chloris-sinica-ID73.mp3',
-            '../assets/data/xeno/XC299255-Turdus-pallidus-ID75.mp3',
-            '../assets/data/xeno/XC314889-Dendrocopos-syriacus-ID41.mp3',
-            '../assets/data/xeno/XC408207-Garrulus-glandarius-ID59.mp3',
-            '../assets/data/xeno/XC412802-Ficedula-narcissina-ID71.mp3',
-            '../assets/data/xeno/XC475534-Hypsipetes-amaurotis-ID51.mp3',
-            '../assets/data/xeno/XC542133-Turdus-eunomus-ID57.mp3',
-            '../assets/data/xeno/XC574136-White-cheekedStarling-Spodiopsar cineraceus_ID64.mp3',
-            '../assets/data/xeno/XC645359-Long-tailed Tit-Aegithalos caudatus_ID34.mp3',
-            '../assets/data/xeno/XC655679-Ficedula-albicollis-ID7.mp3',
-            '../assets/data/xeno/XC661792-Anas-zonorhyncha-ID77.mp3',
-            '../assets/data/xeno/XC733992-Pica-pica-ID18.mp3',
-            '../assets/data/xeno/XC738681-EuropeanBee-eater-Meropsapiaster_ID22.mp3',
-            '../assets/data/xeno/XC793926-Bull-headedShrike-Laniusbucephalus_ID52.mp3',
-            '../assets/data/xeno/XC803293-Bambusicola-thoracicus-ID54.mp3',
-            '../assets/data/xeno/XC804525-Larus-michahellis-ID46.mp3',
-            '../assets/data/xeno/XC805894-Corvus-macrorhynchos-ID70.mp3',
-            '../assets/data/xeno/XC805925-Emberiza-variabilis-ID63.mp3',
-            '../assets/data/xeno/XC807830-Ficedula-parva-ID35.mp3',
-            '../assets/data/xeno/XC831497-Regulus-regulus-ID26.mp3',
-            '../assets/data/xeno/XC832525-Olive-backedPipit-Anthushodgsoni_ID72.mp3',
-            '../assets/data/xeno/XC839045-Alcedo-atthis-ID12.mp3',
-            '../assets/data/xeno/XC874576-Streptopelia-orientalis-ID74.mp3',
-            '../assets/data/xeno/XC894176-Coloeus-monedula-ID17.mp3',
-            '../assets/data/xeno/XC899206-Passer-montanus-ID42.mp3',
-            '../assets/data/xeno/XC914505-Phoenicurus-auroreus-ID56.mp3',
-            '../assets/data/xeno/XC915048-Muscicapa-striata-ID39.mp3',
-            '../assets/data/xeno/XC942559-Athene-noctua-ID33.mp3',
-            '../assets/data/xeno/XC945796-Carduelis-carduelis-ID23.mp3',
-            '../assets/data/xeno/XC947696-JapaneseSparrowhawk-Accipitergularis_ID66.mp3',
-            '../assets/data/xeno/XC948991-Buteo-japonicus-ID58.mp3',
-            '../assets/data/xeno/XC956443-Motacilla-alba-ID44.mp3',
-            '../assets/data/xeno/XC982464-Ardea-alba-ID61.mp3',
-            '../assets/data/xeno/XC983633-Accipiter-nisus-ID20.mp3',
-            '../assets/data/xeno/XC988168-Grey Heron-Ardea_cinerea_ID28.mp3',
-            '../assets/data/xeno/XC992370-Parus-minor-ID68.mp3',
-            '../assets/data/xeno/XC992957-Emberiza-spodocephala-ID49.mp3',
-            '../assets/data/xeno/XC993082-Zosterops-japonicus-ID69.mp3',
-            '../assets/data/xeno/XC996479-Spinus-spinus-ID19.mp3',
-            '../assets/data/xeno/XC996878-Emberiza-rustica-ID76.mp3'
+            'assets/data/xeno/XC1001933-Milvus-migrans-ID48.mp3',
+            'assets/data/xeno/XC1003433-Sturnus-vulgaris-ID40.mp3',
+            'assets/data/xeno/XC1020499-Hirundo-rustica-ID3.mp3',
+            'assets/data/xeno/XC1024253-Corvus-frugilegus-ID36.mp3',
+            'assets/data/xeno/XC1029700-Upupa-epops-ID11.mp3',
+            'assets/data/xeno/XC1036835-Corvus-corone-ID53.mp3',
+            'assets/data/xeno/XC1044078-Psittacula-eupatria-ID1.mp3',
+            'assets/data/xeno/XC1046013-Psittacula-krameri-ID37.mp3',
+            'assets/data/xeno/XC1052241-Buteo-buteo-ID8.mp3',
+            'assets/data/xeno/XC1070806-Corvus-corax-ID14.mp3',
+            'assets/data/xeno/XC1072048-Periparus-ater-ID55.mp3',
+            'assets/data/xeno/XC1075277-Luscinia-megarhynchos-ID13.mp3',
+            'assets/data/xeno/XC1075414-Troglodytes-troglodytes-ID21.mp3',
+            'assets/data/xeno/XC1076066-Sylvia-atricapilla-ID5.mp3',
+            'assets/data/xeno/XC1076083-Motacilla-cinerea-ID29.mp3',
+            'assets/data/xeno/XC1077472-Sitta-europaea-ID60.mp3',
+            'assets/data/xeno/XC1079914-Fringilla-montifringilla-ID6.mp3',
+            'assets/data/xeno/XC1079999-Phylloscopus-trochilus-ID45.mp3',
+            'assets/data/xeno/XC1080027-Phoenicurus-phoenicurus-ID15.mp3',
+            'assets/data/xeno/XC1080501-Turdus-philomelos-ID38.mp3',
+            'assets/data/xeno/XC1082804-Strix-uralensis-ID78.mp3',
+            'assets/data/xeno/XC1083558-Cyanistes-caeruleus-ID16.mp3',
+            'assets/data/xeno/XC1085465-Phylloscopus-collybita-ID10.mp3',
+            'assets/data/xeno/XC1088124-HoodedCrow-Corvuscornix_ID31.mp3',
+            'assets/data/xeno/XC1088279-Passer-domesticus-ID32.mp3',
+            'assets/data/xeno/XC1103515-Tachymarptis-melba-ID2.mp3',
+            'assets/data/xeno/XC1103936-Ciconia-ciconia-ID43.mp3',
+            'assets/data/xeno/XC1104628-Erithacus-rubecula-ID25.mp3',
+            'assets/data/xeno/XC1106173-Parus-major-ID27.mp3',
+            'assets/data/xeno/XC1106637-Fringilla-coelebs-ID9.mp3',
+            'assets/data/xeno/XC1107554-Chloris-chloris-ID24.mp3',
+            'assets/data/xeno/XC1136220-Turdus-merula-ID4.mp3',
+            'assets/data/xeno/XC175812-Cyanopica-cyanus-ID47.mp3',
+            'assets/data/xeno/XC210479-Coccothraustes-coccothraustes-ID30.mp3',
+            'assets/data/xeno/XC236705-Zoothera-aurea-ID80.mp3',
+            'assets/data/xeno/XC282185-Phasianus-versicolor-ID62.mp3',
+            'assets/data/xeno/XC285694-Horornis-diphone-ID65.mp3',
+            'assets/data/xeno/XC285710-Turdus-cardis-ID67.mp3',
+            'assets/data/xeno/XC285803-Turdus-chrysolaus-ID50.mp3',
+            'assets/data/xeno/XC285804-Sittiparus-varius-ID79.mp3',
+            'assets/data/xeno/XC285949-Chloris-sinica-ID73.mp3',
+            'assets/data/xeno/XC299255-Turdus-pallidus-ID75.mp3',
+            'assets/data/xeno/XC314889-Dendrocopos-syriacus-ID41.mp3',
+            'assets/data/xeno/XC408207-Garrulus-glandarius-ID59.mp3',
+            'assets/data/xeno/XC412802-Ficedula-narcissina-ID71.mp3',
+            'assets/data/xeno/XC475534-Hypsipetes-amaurotis-ID51.mp3',
+            'assets/data/xeno/XC542133-Turdus-eunomus-ID57.mp3',
+            'assets/data/xeno/XC574136-White-cheekedStarling-Spodiopsar cineraceus_ID64.mp3',
+            'assets/data/xeno/XC645359-Long-tailed Tit-Aegithalos caudatus_ID34.mp3',
+            'assets/data/xeno/XC655679-Ficedula-albicollis-ID7.mp3',
+            'assets/data/xeno/XC661792-Anas-zonorhyncha-ID77.mp3',
+            'assets/data/xeno/XC733992-Pica-pica-ID18.mp3',
+            'assets/data/xeno/XC738681-EuropeanBee-eater-Meropsapiaster_ID22.mp3',
+            'assets/data/xeno/XC793926-Bull-headedShrike-Laniusbucephalus_ID52.mp3',
+            'assets/data/xeno/XC803293-Bambusicola-thoracicus-ID54.mp3',
+            'assets/data/xeno/XC804525-Larus-michahellis-ID46.mp3',
+            'assets/data/xeno/XC805894-Corvus-macrorhynchos-ID70.mp3',
+            'assets/data/xeno/XC805925-Emberiza-variabilis-ID63.mp3',
+            'assets/data/xeno/XC807830-Ficedula-parva-ID35.mp3',
+            'assets/data/xeno/XC831497-Regulus-regulus-ID26.mp3',
+            'assets/data/xeno/XC832525-Olive-backedPipit-Anthushodgsoni_ID72.mp3',
+            'assets/data/xeno/XC839045-Alcedo-atthis-ID12.mp3',
+            'assets/data/xeno/XC874576-Streptopelia-orientalis-ID74.mp3',
+            'assets/data/xeno/XC894176-Coloeus-monedula-ID17.mp3',
+            'assets/data/xeno/XC899206-Passer-montanus-ID42.mp3',
+            'assets/data/xeno/XC914505-Phoenicurus-auroreus-ID56.mp3',
+            'assets/data/xeno/XC915048-Muscicapa-striata-ID39.mp3',
+            'assets/data/xeno/XC942559-Athene-noctua-ID33.mp3',
+            'assets/data/xeno/XC945796-Carduelis-carduelis-ID23.mp3',
+            'assets/data/xeno/XC947696-JapaneseSparrowhawk-Accipitergularis_ID66.mp3',
+            'assets/data/xeno/XC948991-Buteo-japonicus-ID58.mp3',
+            'assets/data/xeno/XC956443-Motacilla-alba-ID44.mp3',
+            'assets/data/xeno/XC982464-Ardea-alba-ID61.mp3',
+            'assets/data/xeno/XC983633-Accipiter-nisus-ID20.mp3',
+            'assets/data/xeno/XC988168-Grey Heron-Ardea_cinerea_ID28.mp3',
+            'assets/data/xeno/XC992370-Parus-minor-ID68.mp3',
+            'assets/data/xeno/XC992957-Emberiza-spodocephala-ID49.mp3',
+            'assets/data/xeno/XC993082-Zosterops-japonicus-ID69.mp3',
+            'assets/data/xeno/XC996479-Spinus-spinus-ID19.mp3',
+            'assets/data/xeno/XC996878-Emberiza-rustica-ID76.mp3'
         ];
 
         var VIDEOS = [
-            {src: '../assets/ui/bg/tr.webm', key: 'tr'},
-            {src: '../assets/ui/bg/jp.webm',  key: 'jp'}
+            {src: 'assets/ui/bg/tr.webm', key: 'tr'},
+            {src: 'assets/ui/bg/jp.webm',  key: 'jp'}
         ];
 
         var bar    = document.getElementById('bh-bar');
@@ -2526,7 +2526,7 @@ var BH = (function () {
                 el.style.display = el.dataset.lang === _plLang ? '' : 'none';
             });
             // Set intro background
-            var bgs = ['../assets/ui/intro/TRScene.png', '../assets/ui/intro/JPScene.png'];
+            var bgs = ['assets/ui/intro/TRScene.png', 'assets/ui/intro/JPScene.png'];
             var bg = document.getElementById('introBg');
             if (bg) {
                 bg.style.backgroundImage = "url('" + bgs[Math.floor(Math.random()*2)] + "')";
