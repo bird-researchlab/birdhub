@@ -1,0 +1,87 @@
+BIRDHUB — KAYIT (BACKUP AUDIO) KLASÖRÜ HAKKINDA
+==================================================
+
+Bu klasör, BirdHub projesinin YTÜ tarafındaki canlı ses akışının teknik
+nedenlerle (sunucu/stream erişilebilirliği vb.) geçici olarak kesintiye
+uğradığı durumlar için hazırlanan yedek (kayıt) sürümünü içerir.
+
+1. SES MANTIĞI
+----------------
+Canlı sürümde her iki taraf da (YTÜ ve Tokyo) gerçek zamanlı stream'den
+besleniyor. Kayıt sürümünde ise sadece YTÜ/TR tarafı yerel bir kayıtla
+(yedek.mp3, ~3 saatlik, rastgele bir noktadan başlayıp döngüye giren)
+değiştirilmiştir. Tokyo tarafı bu sürümde de canlı kalmaya devam eder
+(audio-proxy.php üzerinden, otomatik yeniden bağlanma aktif). Yani bu
+tam bir "kayıt sürümü" değil, sadece TR tarafının yedeklenmiş halidir.
+
+2. KLASÖR YAPISI VE AMACI
+----------------------------
+kayıt/
+├── index.html          → Ana index'in (dnmydk.html) test amaçlı kopyası.
+├── a/, b/, c/           → Üç sahne versiyonunun (bbvrda, jfetgdb, btfjgfc)
+│                          test amaçlı kopyaları.
+└── sürükle bırak/       → Asıl kullanılacak, sunucuya YÜKLENECEK dosyalar.
+    ├── index.html
+    ├── bbvrda/
+    ├── jfetgdb/
+    └── btfjgfc/
+
+"kayıt/" klasörünün kökündeki (a, b, c ve index.html) dosyalar TEST
+amaçlıdır: sunucudaki mevcut "assets" klasörünü tekrar kopyalamadan,
+doğrudan bu klasörün içinden açılıp ses/görsel/video yollarının çalışıp
+çalışmadığı kontrol edilebilir (path'ler bir klasör daha derinde
+olduğu için ../../assets şeklinde ayarlanmıştır).
+
+"sürükle bırak" klasörünün içindekiler ise GERÇEK dosya adlarını taşır
+(bbvrda, jfetgdb, btfjgfc) ve path derinlikleri sunucudaki mevcut canlı
+dosyalarla birebir aynıdır (../assets, ../audio-proxy.php). Canlı
+yayından kayıt sürümüne geçmek gerektiğinde, bu klasörün İÇİNDEKİ
+dosyalar doğrudan sunucudaki ilgili klasörlerin/dosyaların üzerine
+kopyalanabilir — başka hiçbir değişiklik gerekmez.
+
+3. YAPILAN DÜZELTMELER
+-------------------------
+Bu sürümdeki tüm dosyalarda (ana index + a/b/c) macOS/iOS Safari'de
+bold yazıların gereğinden kalın görünmesini önleyen bir CSS kuralı
+eklenmiştir (-webkit-font-smoothing:antialiased vb.). Ayrıca ana
+index'in (dnmydk.html) bazı font-weight/text-shadow değerleri ve
+mobil responsive breakpoint ölçüleri, canlı sürümdeki ana index ile
+tutarlı hale getirilmiştir. Tooltip/etiket metinlerine (ör. "Yerel
+Ses Manzarası" / "Uzak Ses Manzarası") KASITLI OLARAK dokunulmamıştır;
+bu metinler canlı sürümden farklıdır çünkü bu tarafın artık kayıttan
+çalındığını yansıtmaktadır.
+
+Ana index'e ayrıca: Acknowledgements/Teşekkür bölümü (SBI-2025-6127
+proje teşekkürü) eklenmiş ve "veya/or/または" ifadesi "ve/and/および"
+olarak canlı sürümle tutarlı hale getirilmiştir.
+
+Tüm dosyalarda (ana index + a/b/c), hoparlörün üstündeki holo/bayrak/
+ses ikonu/volume slider grubu, canlı sürümdeki ile aynı ölçüde hafifçe
+sol-aşağı kaydırılmıştır (speaker.png'ye dokunulmamıştır, o sabit
+kalmıştır).
+
+4. SES DALGASI (WAVE) VE KUŞ KATALOĞU DÜZELTMELERİ
+-----------------------------------------------------
+Hoparlörün üstünde beliren ses dalgası efekti (.wave-group), speaker
+görselinin arkasında kalıp görünmeme sorunu yaşıyordu — z-index'i
+(katman sırası) speaker'dan düşüktü. Bu z-index yükseltilerek dalga
+artık her zaman speaker'ın üstünde görünüyor.
+
+Kuş kataloğunda da iki düzeltme yapıldı: (1) katalog açıldığında
+seçili gelen ilk kuşun sesi artık otomatik çalıyor (önceden sessizdi),
+(2) tüm kuş seslerinin dosyaları (~10MB toplam) liste yüklenir
+yüklenmez arka planda önceden tarayıcı önbelleğine çekiliyor, böylece
+bir kuşa tıklandığında ses gecikmeden başlıyor.
+
+DÜZELTME: (1) numaralı madde ilk denemede yanlış yere eklenmişti —
+ses, sahne seçilir seçilmez (kullanıcı kataloğu hiç açmadan) çalmaya
+başlıyordu. Bu düzeltildi: artık ses, sadece kullanıcı gerçekten
+kitap ikonuna tıklayıp kataloğu AÇTIĞINDA çalmaya başlıyor (klavyeden
+"j" kısayoluyla açılışta da aynı şekilde çalışıyor).
+
+5. YTÜ BİLGİ METNİ NOTU
+--------------------------
+"Teknik bakım nedeniyle yerel ses şu an kayıttan yayınlanıyor" bilgisi
+BU (Kayıt) sürümünde YOKTUR — sadece "Gece Kayıtlı" (uzun-kayıtlı-
+gece-dahil) sürümünün hub bilgi panelinde, YTÜ/TR paragrafının sonunda
+(üç dilde de) mevcuttur. Bilerek böyle ayrılmıştır.
