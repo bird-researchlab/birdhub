@@ -45,3 +45,50 @@
 <IfModule mod_deflate.c>
     AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json
 </IfModule>
+
+# ============================================
+# Erişim Kısıtlamaları (güvenlik)
+# ============================================
+
+# Klasör içeriklerinin listelenmesini kapat (assets/, kayıt/ vb.)
+Options -Indexes
+
+# Not/bilgi dosyaları, arşivler ve gizli dosyalar dışarıdan açılamasın
+<FilesMatch "(\.(txt|md|zip|bak|log|ini|sh)$|^\.)">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Yedek kayıtlar internetten doğrudan açılamaz; yalnızca ses.php diskten okuyup sunar
+    RewriteRule ^assets/data/yedek(/|$) - [F,L,NC]
+
+    # assets/: sadece sitenin kendi sayfalarından gelen isteklere izin ver.
+    # Adres çubuğuna doğrudan yazılan veya başka sitelerden gelen istekler 403.
+    # (favicon hariç — tarayıcılar onu Referer göndermeden isteyebilir)
+    RewriteCond %{REQUEST_URI} !/assets/ui/intro/birdhub_logo\.png$
+    RewriteCond %{HTTP_HOST}@@%{HTTP_REFERER} !^([^@:]*)(:\d+)?@@https?://\1(:\d+)?/ [NC]
+    RewriteRule ^assets/ - [F,L]
+</IfModule>
+
+# ============================================
+# Tek ağ geçidi: dışarıdan sadece ses.php çalışır (yönetim sayfası da ses.php?yonetim).
+# audio-proxy.php dahil diğer tüm .php dosyaları kapalıdır.
+# Durum/log dosyası (.ses-veri.json) nokta ile başladığı için yukarıdaki kuralla kapalıdır.
+# ============================================
+<FilesMatch "^(?!ses\.php$).+\.php$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>

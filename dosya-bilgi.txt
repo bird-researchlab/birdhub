@@ -1,121 +1,69 @@
-BIRDHUB — DOSYA YAPISI VE KULLANIM REHBERİ
+BIRDHUB — DOSYA YAPISI VE KULLANIM
 ==================================================
 
-Bu proje, Yıldız Teknik Üniversitesi (İstanbul) ile Tokyo Üniversitesi
-arasında canlı ses manzarası ve kuş yaşamını bağlayan interaktif bir
-web deneyimidir. Aşağıda, sunucudaki KÖK DİZİN'in (canlı sürüm) ve
-ayrıca ayrı paketler halinde tutulan KAYIT ve GECE KAYITLI sürümlerinin
-ne olduğu, ne zaman kullanıldığı ve içlerinde ne bulunduğu özetlenmiştir.
+Yıldız Teknik Üniversitesi (İstanbul) ile Tokyo Üniversitesi arasında canlı
+ses manzarası ve kuş yaşamını bağlayan interaktif web deneyimi.
 
 
-1. KÖK DİZİN — CANLI SÜRÜM
-==================================================
-Bu, sunucuda şu an yayında olan, normal koşullarda kullanılan sürümdür.
-Her iki taraf da (YTÜ ve Tokyo) GERÇEK ZAMANLI ses akışıyla çalışır.
-
-İçindekiler:
-- index.html          → Ana giriş sayfası (İSTANBUL / TOKYO seçim ekranı,
-                         canlı ses akışı ile).
-- bbvrda/              → A versiyonu (bağımsız sahne sayfası).
-- jfetgdb/              → B versiyonu (bağımsız sahne sayfası).
-- btfjgfc/              → C versiyonu (bağımsız sahne sayfası).
-  (Bu üçü aynı deneyimin farklı test/yayın kopyalarıdır, hepsi canlı
-   ses akışı kullanır.)
-- dnmydk.html          → Bu dosya fiziksel olarak kökte durur ama
-                         içeriği "Kayıt" mantığındadır (bkz. madde 2) —
-                         yani sunucuda halihazırda bir yedek/kayıt
-                         sayfası olarak bulunur, canlı sürümün bir
-                         parçası değildir.
-- audio-proxy.php      → Tokyo'nun ses akışını sunucu üzerinden proxy'ler
-                         (Tokyo tarafının SSL sertifikası süresi dolduğu
-                         için doğrudan bağlantı tarayıcıda engellenir).
-- .htaccess            → Önbellekleme/performans kuralları (Apache'ye
-                         özgüdür, GitHub Pages gibi Apache olmayan
-                         sunucularda hiçbir etkisi olmaz).
-- assets/              → Tüm görsel, ses, video ve veri dosyaları
-                         (bkz. madde 4).
-
-Ne zaman kullanılır: Her şey normal çalışırken, varsayılan/asıl sürüm
-budur.
+DOSYALAR
+--------
+index.html           Ana giriş sayfası (İSTANBUL / TOKYO seçimi).
+bbvrda/index.html    A versiyonu (kendi başına çalışır, arayüzü farklı).
+jfetgdb/index.html   B versiyonu.
+btfjgfc/index.html   C versiyonu.
+ses.php              TEK PHP DOSYASI. Sesin tek kaynağı, kontrol, log ve yönetim.
+assets/              Görseller, fontlar, videolar, kuş verileri ve kayıtlar.
+.htaccess            Önbellek ve erişim kuralları (sadece Apache'de çalışır).
+.ses-veri.json       Kendiliğinden oluşur: güncel durum + değişiklik logu. Silmeyin.
 
 
-2. KAYIT SÜRÜMÜ (kayit-paketi.zip)
-==================================================
-YTÜ tarafındaki canlı akış teknik bir sebeple (sunucu bakımı, stream
-erişilemezliği vb.) kesintiye uğradığında devreye giren yedek sürümdür.
-Sadece YTÜ/TR tarafı etkilenir: tek bir sabit kayıt dosyası (yedek.mp3,
-~3 saatlik) rastgele bir noktadan başlayıp döngüye girer. Tokyo tarafı
-bu sürümde de CANLI kalmaya devam eder.
+SES NASIL ÇALIŞIR
+-----------------
+Dört sayfa da sesi yalnızca ses.php'den alır. Canlı mı kayıt mı olduğuna
+sunucu karar verir; sayfa açıkken de 2 dakikada bir sorulur, değişirse ses
+kendiliğinden yeni kaynağa geçer.
 
-Paket içinde:
-kayıt/
-├── index.html, a/, b/, c/     → Test amaçlı kopyalar (mevcut sunucudaki
-│                                 assets/ klasörünü tekrar kopyalamadan
-│                                 doğrudan denemek için).
-└── sürükle bırak/              → Sunucuya YÜKLENECEK asıl dosyalar.
-    ├── index.html              → Kökteki dnmydk.html'in yerine geçer.
-    ├── bbvrda/, jfetgdb/, btfjgfc/  → A/B/C'nin yerine geçer.
-
-Nasıl kullanılır: "sürükle bırak" klasörünün içindeki dosyalar, kökteki
-karşılıklarının (dnmydk.html, bbvrda/, jfetgdb/, btfjgfc/) üzerine
-kopyalanır. Başka hiçbir değişiklik gerekmez, path'ler zaten sunucudaki
-mevcut assets/ klasörüne göre ayarlanmıştır.
-
-Not: Bu sürümde, YTÜ tarafını anlatan bilgi metninde "şu an kayıttan
-yayınlanıyor" gibi bir uyarı YOKTUR (bilinçli olarak, bkz. madde 3).
+- TR (YTÜ) ve Japonya (Tokyo) birbirinden BAĞIMSIZDIR: biri kayıtta, diğeri
+  canlıda olabilir.
+- Her 5 dakikada bir yayın kontrol edilir (HTTP 2xx ve kısa sürede en az 16 KB
+  ses verisi gelmeli). Gelmiyorsa o taraf kayda geçer, geri gelince canlıya döner.
+- Kontrol aralığı ses.php'nin başındaki 'kontrol_aralik' ayarıdır (saniye).
+- Kayıt modunda kayıt, her bağlanışta rastgele bir noktadan başlar ve döngüye girer.
+- Ekrandaki "Livestream" / "Soundscape" etiketi, o tarafın sesi canlıysa
+  "Livestream", kayıtsa nötr "Soundscape" olarak kendiliğinden değişir.
 
 
-3. GECE KAYITLI SÜRÜMÜ (uzun-kayitli-gece-dahil.zip)
-==================================================
-Kayıt sürümünün daha gelişmiş hali. Tek bir sabit dosya yerine, GÜNÜN
-SAATİNE GÖRE değişen birden fazla kayıt kullanır — böylece gün boyu hep
-aynı ses tekrar etmez, sanki farklı zaman dilimlerinde farklı doğal ses
-kaydedilmiş gibi bir çeşitlilik sağlar.
-
-Saat programı (YTÜ/TR tarafı):
-  05:00–14:00  → yedek.mp3
-  14:00–19:00  → 20260627-1400-01.mp3
-  19:00–01:00  → 20260629-1900-01.mp3
-  01:00–05:00  → 20260630-0100-01.mp3
-
-Her dilime girildiğinde kayıt rastgele bir noktadan başlar; kayıt kendi
-içinde bittiğinde karışmasın diye baştan (0. saniyeden) devam eder.
-Sayfa açık kaldığı sürece saat dilimi değişimi otomatik algılanır ve
-ses kaynağı buna göre değişir. Tokyo tarafı burada da canlı kalır.
-
-Bu sürümde SADECE ana index vardır, A/B/C versiyonu YOKTUR:
-uzun-kayıtlı-gece-dahil/
-├── index.html              → Test amaçlı kopya.
-└── sürükle bırak/
-    └── index.html          → Kökteki dnmydk.html'in yerine geçer.
-
-Ayrıca bu sürümde, YTÜ tarafını anlatan bilgi metninin sonuna (üç dilde
-de) "teknik bakım nedeniyle yerel ses şu an kayıttan yayınlanıyor"
-bilgisi eklenmiştir — Kayıt sürümünde bu metin YOKTUR, sadece burada
-vardır.
-
-Ne zaman kullanılır: Kayıt sürümüne göre daha uzun süreli/kalıcı bir
-kesinti bekleniyorsa, ya da ses çeşitliliği önemliyse tercih edilir.
+KAYIT DOSYALARI  (assets/data/yedek/)
+-------------------------------------
+yedek.mp3      TR (YTÜ) yedek kaydı.
+jp-kayit.mp3   Japonya (Tokyo) yedek kaydı.
+Bunları değiştirmek için aynı adla üzerine kopyalayın. Dosyalar 100 MB'ı
+aşmamalı. Bu klasör internetten kapalıdır; kayıtlar yalnızca ses.php üzerinden
+sunulur.
 
 
-4. ASSETS/ KLASÖRÜ HAKKINDA KISACA
-==================================================
-assets/ui/          → Arayüz görselleri; alt klasörler sahneye göre
-                       ayrılmıştır: tr/ (YTÜ'ye özel), jp/ (Tokyo'ya
-                       özel), both/ (her iki sahnede de kullanılan ortak
-                       görseller), intro/ (giriş/seçim ekranı görselleri).
-assets/ui/fonts/     → Kullanılan yazı tipleri (Liberation Sans, Noto
-                       Sans JP).
-assets/ui/bg/        → Sahne arka plan videoları (tr.webm, jp.webm).
-assets/data/json/    → Kuş kataloğu verileri (birds_tr.json, birds_jp.json)
-                       — kuş adları, açıklamaları, görselleri, ses linkleri.
-assets/data/xeno/    → Kuş kataloğundaki her kuşun ses kaydı (Xeno-canto
-                       arşivinden alınan tekil kayıtlar).
-assets/data/yedek/   → Kayıt ve Gece Kayıtlı sürümlerinde kullanılan
-                       yedek/saat-dilimi ses dosyaları (yedek.mp3 ve
-                       saat dilimi dosyaları).
+YÖNETİM
+-------
+Adres: <site>/ses.php?yonetim   (şifre ses.php'nin en üstündeki 'sifre' satırı)
+- TR ve Japonya için: Otomatik / Zorla canlı / Zorla kayıt
+- "Şimdi kontrol et"
+- "Excel raporunu indir": gün gün canlı/kayıt dakikaları + her değişikliğin
+  tarihi, sebebi ve otomatik mi elle mi olduğu.
 
-Kısacası: assets/ klasörü tüm sürümler (Canlı, Kayıt, Gece Kayıtlı)
-arasında ORTAK ve TEK bir klasördür — hiçbiri kendi assets kopyasını
-taşımaz, hepsi sunucudaki aynı assets/ klasörüne farklı derinlikten
-(../assets, ../../assets, vs.) erişir.
+Cron (isteğe bağlı ama önerilir): kontrol, siteyi açan ziyaretçi tarafından
+tetiklenir. Sitede uzun süre kimse yoksa o aralıktaki kesintiler loga
+girmez. Düzenli kontrol için panelden 5 dakikada bir çalışan bir cron/uptime isteği
+tanımlayın:  <site>/ses.php?kontrol=<ses.php içindeki cron_anahtar>
+
+Test için sayfa adresine ?mod=kayit veya ?mod=canli eklenebilir
+(örn. bbvrda/?mod=kayit).
+
+
+SUNUCUYA YÜKLERKEN
+------------------
+- ses.php'nin bulunduğu klasöre YAZMA İZNİ gerekir (.ses-veri.json orada oluşur).
+- PHP'nin curl uzantısı açık olmalı.
+- Yönetim şifresini ses.php içinde değiştirin.
+- Yükledikten sonra şu adreslerin kapalı olduğunu kontrol edin:
+  /.ses-veri.json   /assets/data/yedek/yedek.mp3   (403 vermeli)
+- Tokyo yayınının sertifikası bozulursa ses.php'de Japonya için 'ssl' => false yapın.

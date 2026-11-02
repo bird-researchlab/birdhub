@@ -944,12 +944,46 @@ var BH = (function () {
     var _vtrUrl = null;
     var _vjpUrl = null;
 
+    // Ses kaynağı: ses yalnızca ses.php'den gelir; canlı mı kayıt mı olduğuna sunucu karar verir.
+    // Sayfa açıkken de durum sorulur, değişirse ses kendiliğinden yeni kaynağa geçer. Test: adrese ?mod=kayit veya ?mod=canli ekleyin.
+    var BirdSes = (function () {
+        var B = '../', Z = (location.search.match(/[?&]mod=(canli|kayit)/) || [])[1] || '',
+            mod = { tr: Z, jp: Z }, L = [];
+        function url(t, ek) { return B + 'ses.php?src=' + t + (Z ? '&mod=' + Z : '') + (ek || ''); }
+        function sor() {
+            if (Z) return Promise.resolve();
+            return fetch(B + 'ses.php?durum=1', { cache: 'no-store' }).then(function (r) { return r.json(); }).then(function (d) {
+                L.forEach(function (s) {
+                    var yeni = d[s.t], eski = mod[s.t];
+                    if (!yeni) return;
+                    mod[s.t] = yeni; s.a.loop = (yeni === 'kayit');
+                    if (eski && eski !== yeni) { s.a.src = url(s.t, '&t=' + Date.now()); s.a.load(); s.a.play().catch(function () {}); }
+                });
+            }).catch(function () {});
+        }
+        var ilk = sor();
+        setInterval(sor, 120000);
+        document.addEventListener('visibilitychange', function () { if (!document.hidden) sor(); });
+        return {
+            mod: mod,
+            attach: function (a, t) {   // src hemen atanır; sayfanın sessiz ön yükleme play() çağrısı bozulmasın
+                L.push({ a: a, t: t }); a._bsTaraf = t; a.src = url(t);
+                a.addEventListener('loadedmetadata', function () {   // kayıt modunda kaydın rastgele bir yerinden başla
+                    ilk.then(function () {
+                        a.loop = (mod[t] === 'kayit');
+                        if (mod[t] === 'kayit' && a.duration && isFinite(a.duration)) a.currentTime = Math.random() * a.duration;
+                    });
+                });
+                return a;
+            }
+        };
+    })();
+
     // Live audio streams — never paused, only muted. Keeps buffer full for instant playback.
-    // Tokyo (mp3s.nc.u-tokyo.ac.jp) sertifikasi gecersiz oldugu icin
-    // (ERR_CERT_DATE_INVALID) kendi sunucumuzdan proxy'liyoruz.
+    // Kaynaklar BirdSes üzerinden ses.php'den gelir (canlı yayın ya da kayıt; Tokyo proxy'si de orada).
     var STREAM = {
-        ytu:   new Audio('https://birdstream.yildiz.edu.tr/ta1afo.mp3'),
-        tokyo: new Audio('../audio-proxy.php?src=tokyo')
+        ytu:   BirdSes.attach(new Audio(), 'tr'),
+        tokyo: BirdSes.attach(new Audio(), 'jp')
     };
 
     // Auto-reconnect helper for live streams
@@ -959,6 +993,7 @@ var BH = (function () {
 
         function _reconnect() {
             if (_reconnecting) return;
+            if (a._bsTaraf && BirdSes.mod[a._bsTaraf] === 'kayit') return; // kayıt dosyasında yeniden bağlanma gerekmez
             _reconnecting = true;
             var wasMuted = a.muted;
             var vol = a.volume;
