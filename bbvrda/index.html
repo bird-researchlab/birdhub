@@ -1355,17 +1355,24 @@ var BH = (function () {
             mod = { tr: Z, jp: Z }, L = [], api, php = null,
             KAYIT = { tr: 'assets/data/yedek/yedek.mp3', jp: 'assets/data/yedek/jp-kayit.mp3' };
         function url(t, ek) { return B + 'ses.php?src=' + t + (Z ? '&mod=' + Z : '') + (ek || ''); }
+        function yedegeGec(s) {   // ses.php yok (GitHub Pages: dosya duz metin gelir) -> kayit dosyasindan cal
+            var a = s.a;
+            if (Z || a._bsYedek) return;
+            a._bsYedek = true; mod[s.t] = 'kayit'; a.loop = true;
+            a.src = B + KAYIT[s.t]; a.load(); a.play().catch(function () {});
+            if (api && api.degisti) api.degisti();
+        }
         function sor() {
             if (Z) return Promise.resolve();
             return fetch(B + 'ses.php?durum=1', { cache: 'no-store' }).then(function (r) { return r.json(); }).then(function (d) { php = true;
                 L.forEach(function (s) {
-                    var yeni = d[s.t], eski = mod[s.t];
+                    var yeni = d[s.t], eski = mod[s.t], geri = s.a._bsYedek;
                     if (!yeni) return;
-                    mod[s.t] = yeni; s.a.loop = (yeni === 'kayit');
-                    if (eski && eski !== yeni) { s.a.src = url(s.t, '&t=' + Date.now()); s.a.load(); s.a.play().catch(function () {}); }
+                    mod[s.t] = yeni; s.a.loop = (yeni === 'kayit'); s.a._bsYedek = false;
+                    if (geri || (eski && eski !== yeni)) { s.a.src = url(s.t, '&t=' + Date.now()); s.a.load(); s.a.play().catch(function () {}); }
                 });
                 if (api.degisti) api.degisti();
-            }).catch(function () { if (php === null) php = false; });
+            }).catch(function () { if (php === null) { php = false; L.forEach(yedegeGec); } });
         }
         var ilk = sor();
         setInterval(sor, 120000);
@@ -1375,13 +1382,8 @@ var BH = (function () {
             degisti: null,
             attach: function (a, t) {   // src hemen atanır; sayfanın sessiz ön yükleme play() çağrısı bozulmasın
                 L.push({ a: a, t: t }); a._bsTaraf = t; a.src = url(t);
-                a.addEventListener('error', function () {   // ses.php yoksa (GitHub Pages) kayit dosyasindan cal
-                    ilk.then(function () {
-                        if (php !== false || a._bsYedek) return;
-                        a._bsYedek = true; mod[t] = 'kayit'; a.loop = true;
-                        a.src = B + KAYIT[t]; a.load(); a.play().catch(function () {});
-                        if (api.degisti) api.degisti();
-                    });
+                a.addEventListener('error', function () {   // gec baglanan ya da hata veren ses icin de ayni yedek
+                    ilk.then(function () { if (php === false) yedegeGec({ a: a, t: t }); });
                 });
                 a.addEventListener('loadedmetadata', function () {   // kayıt modunda kaydın rastgele bir yerinden başla
                     ilk.then(function () {
