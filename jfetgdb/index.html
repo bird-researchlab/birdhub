@@ -945,21 +945,23 @@ var BH = (function () {
     var _vjpUrl = null;
 
     // Ses kaynağı: ses yalnızca ses.php'den gelir; canlı mı kayıt mı olduğuna sunucu karar verir.
+    // ses.php yoksa (PHP çalıştırmayan GitHub Pages gibi) sayfa doğrudan kayıt dosyasından çalar.
     // Sayfa açıkken de durum sorulur, değişirse ses kendiliğinden yeni kaynağa geçer. Test: adrese ?mod=kayit veya ?mod=canli ekleyin.
     var BirdSes = (function () {
         var B = '../', Z = (location.search.match(/[?&]mod=(canli|kayit)/) || [])[1] || '',
-            mod = { tr: Z, jp: Z }, L = [];
+            mod = { tr: Z, jp: Z }, L = [], php = null,
+            KAYIT = { tr: 'assets/data/yedek/yedek.mp3', jp: 'assets/data/yedek/jp-kayit.mp3' };
         function url(t, ek) { return B + 'ses.php?src=' + t + (Z ? '&mod=' + Z : '') + (ek || ''); }
         function sor() {
             if (Z) return Promise.resolve();
-            return fetch(B + 'ses.php?durum=1', { cache: 'no-store' }).then(function (r) { return r.json(); }).then(function (d) {
+            return fetch(B + 'ses.php?durum=1', { cache: 'no-store' }).then(function (r) { return r.json(); }).then(function (d) { php = true;
                 L.forEach(function (s) {
                     var yeni = d[s.t], eski = mod[s.t];
                     if (!yeni) return;
                     mod[s.t] = yeni; s.a.loop = (yeni === 'kayit');
                     if (eski && eski !== yeni) { s.a.src = url(s.t, '&t=' + Date.now()); s.a.load(); s.a.play().catch(function () {}); }
                 });
-            }).catch(function () {});
+            }).catch(function () { if (php === null) php = false; });
         }
         var ilk = sor();
         setInterval(sor, 120000);
@@ -968,6 +970,13 @@ var BH = (function () {
             mod: mod,
             attach: function (a, t) {   // src hemen atanır; sayfanın sessiz ön yükleme play() çağrısı bozulmasın
                 L.push({ a: a, t: t }); a._bsTaraf = t; a.src = url(t);
+                a.addEventListener('error', function () {   // ses.php yoksa (GitHub Pages) kayit dosyasindan cal
+                    ilk.then(function () {
+                        if (php !== false || a._bsYedek) return;
+                        a._bsYedek = true; mod[t] = 'kayit'; a.loop = true;
+                        a.src = B + KAYIT[t]; a.load(); a.play().catch(function () {});
+                    });
+                });
                 a.addEventListener('loadedmetadata', function () {   // kayıt modunda kaydın rastgele bir yerinden başla
                     ilk.then(function () {
                         a.loop = (mod[t] === 'kayit');

@@ -8,8 +8,8 @@
 
 $AYAR = [
     'kontrol_aralik' => 300,                  // saniye; 300 = 5 dakikada bir (hafif: yayından yalnızca 16 KB çekilir)
-    'sifre'          => '3c12b54d5acbfc9c',          // yönetim sayfası şifresi — canlıya almadan değiştirin
-    'cron_anahtar'   => '464cc81e5404059ab758ced3e656b40e',
+    'sifre'          => '',                   // kodda tutulmaz: sunucudaki ".ses-sifre" dosyasının 1. satırı
+    'cron_anahtar'   => '',                   // kodda tutulmaz: ".ses-sifre" dosyasının 2. satırı
     'kaynaklar' => [
         'tr' => [
             'canli' => 'https://birdstream.yildiz.edu.tr/ta1afo.mp3',
@@ -25,6 +25,12 @@ $AYAR = [
         ],
     ],
 ];
+
+// Şifre ve cron anahtarı depoya girmesin diye ayrı gizli dosyada durur (GitHub'a gönderilmez, internetten açılmaz).
+// Dosya yoksa ya da boşsa yönetim girişi ve cron kapalı kalır.
+$gizli = @file(__DIR__ . '/.ses-sifre', FILE_IGNORE_NEW_LINES) ?: [];
+$AYAR['sifre'] = trim($gizli[0] ?? '');
+$AYAR['cron_anahtar'] = trim($gizli[1] ?? '');
 
 date_default_timezone_set('Europe/Istanbul');
 set_time_limit(0);
@@ -210,7 +216,7 @@ function yonetim() {
         if (!hash_equals($csrf, (string)($_POST['csrf'] ?? ''))) bitir(400, 'Geçersiz istek.');
         $i = $_POST['islem'] ?? '';
         if ($i === 'giris') {
-            if (hash_equals($AYAR['sifre'], (string)($_POST['sifre'] ?? ''))) { session_regenerate_id(true); $_SESSION['giris'] = true; }
+            if ($AYAR['sifre'] !== '' && hash_equals($AYAR['sifre'], (string)($_POST['sifre'] ?? ''))) { session_regenerate_id(true); $_SESSION['giris'] = true; }
             else { sleep(2); $hata = 'Şifre yanlış.'; }
         } elseif (!empty($_SESSION['giris'])) {
             if ($i === 'cikis') { $_SESSION = []; session_destroy(); }
@@ -277,7 +283,7 @@ if (isset($_GET['durum'])) {
 }
 
 if (isset($_GET['kontrol'])) {
-    if (!hash_equals($AYAR['cron_anahtar'], (string)$_GET['kontrol'])) bitir(403, 'Yetkisiz.');
+    if ($AYAR['cron_anahtar'] === '' || !hash_equals($AYAR['cron_anahtar'], (string)$_GET['kontrol'])) bitir(403, 'Yetkisiz.');
     kontrol('cron', true);
     bitir(200, 'tamam');
 }

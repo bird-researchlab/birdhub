@@ -15,6 +15,10 @@ ses.php              TEK PHP DOSYASI. Sesin tek kaynağı, kontrol, log ve yöne
 assets/              Görseller, fontlar, videolar, kuş verileri ve kayıtlar.
 .htaccess            Önbellek ve erişim kuralları (sadece Apache'de çalışır).
 .ses-veri.json       Kendiliğinden oluşur: güncel durum + değişiklik logu. Silmeyin.
+.ses-sifre           GİZLİ. 1. satır yönetim şifresi, 2. satır cron anahtarı. Kodda şifre
+                     yoktur. GitHub'a gönderilmez (.gitignore) ve internetten açılmaz;
+                     sunucuya elle (dosya yöneticisiyle) yükleyin. Yoksa yönetim girişi kapalıdır.
+.gitignore           .ses-sifre ve .ses-veri.json depoya girmesin diye.
 
 
 SES NASIL ÇALIŞIR
@@ -29,6 +33,10 @@ kendiliğinden yeni kaynağa geçer.
   ses verisi gelmeli). Gelmiyorsa o taraf kayda geçer, geri gelince canlıya döner.
 - Kontrol aralığı ses.php'nin başındaki 'kontrol_aralik' ayarıdır (saniye).
 - Kayıt modunda kayıt, her bağlanışta rastgele bir noktadan başlar ve döngüye girer.
+- PHP ÇALIŞMAYAN yerde (örn. GitHub Pages) ses.php 404 verir; sayfalar bunu fark edip
+  doğrudan assets/data/yedek/ içindeki kayıtlardan çalar (hep kayıt, etiket "Soundscape").
+  PHP olan sunucuda bu yedek devreye girmez, her şey ses.php üzerinden yürür.
+  Not: GitHub'da .htaccess işlemez, kayıt dosyaları orada herkese açıktır.
 - Ekrandaki "Livestream" / "Soundscape" etiketi, o tarafın sesi canlıysa
   "Livestream", kayıtsa nötr "Soundscape" olarak kendiliğinden değişir.
 
@@ -44,7 +52,7 @@ sunulur.
 
 YÖNETİM
 -------
-Adres: <site>/ses.php?yonetim   (şifre ses.php'nin en üstündeki 'sifre' satırı)
+Adres: <site>/ses.php?yonetim   (şifre .ses-sifre dosyasının 1. satırı)
 - TR ve Japonya için: Otomatik / Zorla canlı / Zorla kayıt
 - "Şimdi kontrol et"
 - "Excel raporunu indir": gün gün canlı/kayıt dakikaları + her değişikliğin
@@ -53,7 +61,7 @@ Adres: <site>/ses.php?yonetim   (şifre ses.php'nin en üstündeki 'sifre' satı
 Cron (isteğe bağlı ama önerilir): kontrol, siteyi açan ziyaretçi tarafından
 tetiklenir. Sitede uzun süre kimse yoksa o aralıktaki kesintiler loga
 girmez. Düzenli kontrol için panelden 5 dakikada bir çalışan bir cron/uptime isteği
-tanımlayın:  <site>/ses.php?kontrol=<ses.php içindeki cron_anahtar>
+tanımlayın:  <site>/ses.php?kontrol=<.ses-sifre 2. satırı>
 
 Test için sayfa adresine ?mod=kayit veya ?mod=canli eklenebilir
 (örn. bbvrda/?mod=kayit).
@@ -63,7 +71,8 @@ SUNUCUYA YÜKLERKEN
 ------------------
 - ses.php'nin bulunduğu klasöre YAZMA İZNİ gerekir (.ses-veri.json orada oluşur).
 - PHP'nin curl uzantısı açık olmalı.
-- Yönetim şifresini ses.php içinde değiştirin.
+- .ses-sifre dosyasını da sunucuya yükleyin (GitHub'da olmaz, elle koyun). Şifreyi
+  değiştirmek için bu dosyanın 1. satırını düzenleyin.
 - Yükledikten sonra şu adreslerin kapalı olduğunu kontrol edin:
   /.ses-veri.json   /assets/data/yedek/yedek.mp3   (403 vermeli)
 - Tokyo yayınının sertifikası bozulursa ses.php'de Japonya için 'ssl' => false yapın.
